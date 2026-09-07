@@ -1,0 +1,63 @@
+{
+  "seed": 42,
+  "n_candidates": 200,
+  "n_candidates_with_inert": 172,
+  "n_selected": 100,
+  "n_selected_with_inert": 87,
+  "is_mistake": {
+    "True": 96,
+    "False": 4
+  },
+  "edit_cleanliness": {
+    "minor_targeted": 77,
+    "large_single_factor": 23
+  },
+  "effect_pp_quantiles": [
+    50.0,
+    53.3,
+    56.7,
+    60.0,
+    66.7,
+    73.3,
+    80.0,
+    90.0,
+    93.3,
+    100.0
+  ],
+  "baseline_rate_quantiles": [
+    0.5,
+    0.5333333333333333,
+    0.6,
+    0.6333333333333333,
+    0.7,
+    0.7666666666666667,
+    0.8666666666666667,
+    0.9,
+    0.9333333333333333,
+    1.0
+  ],
+  "n_turns": {
+    "1": 56,
+    "2": 25,
+    "4": 7,
+    "3": 9,
+    "5": 3
+  },
+  "has_system": 12,
+  "categories": {
+    "misinterpretation": 56,
+    "surprising_influence": 52,
+    "over_anchoring": 43,
+    "hallucination": 16,
+    "known_then_fixable": 69,
+    "knowledge_absence": 9,
+    "math_mistake": 2,
+    "format_or_length_artifact": 1,
+    "spurious_association": 5,
+    "code_logic_mistake": 9,
+    "entity_or_register_association": 5,
+    "memorized_retrieval": 2,
+    "coherent_quirk_non_mistake": 3,
+    "statistical_or_lexical_artifact": 3
+  }
+}

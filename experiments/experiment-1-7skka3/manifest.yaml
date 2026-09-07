@@ -1,0 +1,9 @@
+experiment: 1
+eid: "exp_01m1z3kydjek0arxfb1w7skka3"
+title: "How often Qwen3-8B's chain of thought verbalizes the verified cause of its behavior"
+date: "2026-09-07"
+status: in-progress
+data: {}
+outputs: {}
+results: {}
+slurm_jobs: []
