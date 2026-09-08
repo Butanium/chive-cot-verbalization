@@ -1,0 +1,1 @@
+Sorted bar chart of per-investigation differences between causal-factor and inert-factor attribution rates, with zero and mean reference lines.

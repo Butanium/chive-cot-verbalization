@@ -1,0 +1,1 @@
+Dot-and-interval plot of pooled judge rates among behavior-exhibiting completions with 95% cluster-bootstrap intervals.

@@ -1,0 +1,1 @@
+Dot-and-interval plot of the causal-factor attribution rate by edit type, effect size, conversation length, mistake status and thinking cap, with inert-factor means as diamonds.

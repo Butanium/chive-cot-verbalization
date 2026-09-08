@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "measure": "Reasoning attributes behavior to causal factor (Q2)",
+      "entity": "causal factor",
+      "rate": 0.41978733240869165,
+      "lo": 0.34249003101462117,
+      "hi": 0.5002344116268167,
+      "n": 2163,
+      "n_inv": 100
+    },
+    {
+      "measure": "Reasoning attributes behavior to inert factor (Q2)",
+      "entity": "inert factor",
+      "rate": 0.3263707571801567,
+      "lo": 0.24532453245324531,
+      "hi": 0.4092292089249493,
+      "n": 1915,
+      "n_inv": 87
+    },
+    {
+      "measure": "Visible answer attributes behavior to causal factor (Q2)",
+      "entity": "visible answer",
+      "rate": 0.337956541840037,
+      "lo": 0.2554502369668246,
+      "hi": 0.4222222222222222,
+      "n": 2163,
+      "n_inv": 100
+    },
+    {
+      "measure": "Reasoning mentions causal factor (Q1)",
+      "entity": "causal factor",
+      "rate": 0.6551086453999075,
+      "lo": 0.5759187620889749,
+      "hi": 0.7323420074349443,
+      "n": 2163,
+      "n_inv": 100
+    },
+    {
+      "measure": "Reasoning mentions inert factor (Q1)",
+      "entity": "inert factor",
+      "rate": 0.658485639686684,
+      "lo": 0.5689561925365062,
+      "hi": 0.7417120237506185,
+      "n": 1915,
+      "n_inv": 87
+    },
+    {
+      "measure": "Reasoning mentions causal factor but does not attribute",
+      "entity": "causal factor",
+      "rate": 0.2353213129912159,
+      "lo": 0.17716535433070865,
+      "hi": 0.29853398489560196,
+      "n": 2163,
+      "n_inv": 100
+    },
+    {
+      "measure": "Reasoning gives another reason, not the causal factor",
+      "entity": "causal factor",
+      "rate": 0.4895977808599168,
+      "lo": 0.4103072348860258,
+      "hi": 0.5636761487964989,
+      "n": 2163,
+      "n_inv": 100
+    },
+    {
+      "measure": "Reasoning gives no reason at all",
+      "entity": "causal factor",
+      "rate": 0.039297272306981046,
+      "lo": 0.014345210550670985,
+      "hi": 0.07334525939177101,
+      "n": 2163,
+      "n_inv": 100
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Scatter of fresh versus released per-investigation behavior rates for 100 investigations with the identity line.

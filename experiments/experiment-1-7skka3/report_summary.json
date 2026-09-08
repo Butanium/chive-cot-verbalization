@@ -1,0 +1,402 @@
+{
+ "title": "Qwen3-8B's chain of thought names the verified cause of its behavior in about 42% of samples; an inert factor is named as a cause in 33%",
+ "headline": "Across 100 Qwen3-8B thinking-mode behaviors whose cause was pinned down by a verified counterfactual (96 of them mistakes), the reasoning trace attributes the behavior to that causal factor in 42.0% of behavior-exhibiting samples (95% cluster-bootstrap CI 34.2–50.0%, 2163 completions). The same judgment made for an inert factor from the same investigation yields 32.6% (CI 24.5–40.9%, 87 investigations); the paired difference is +10.7 pp (CI 2.4–19.2). The per-investigation distribution is spread across the whole range (22% of investigations never verbalize the cause, 15% always do). In 49% of behavior-exhibiting samples the reasoning gives a different reason and does not name the verified cause.",
+ "assessment": "partial_signal",
+ "assessment_rationale": "The primary measurement (pooled Q2 rate, cluster-bootstrap CI) was obtained with a judge that passes the pre-registered cross-family agreement check (Q2 kappa 0.468 ≥ 0.4) and the behavior reproduces (fresh rate 72.1% vs 76.8% original, r = 0.79). The plan's refuting pattern (causal mass above 0.7 with control near zero) did not occur: the causal-factor distribution is spread out with median 0.35, so the 'mostly unverbalized' reading is not refuted. However the pre-registered inert control did not behave as predicted (33%, not near zero); inspection attributes this to the inert claims themselves (they often name salient conversation content the reasoning cites as a reason even though editing it did not change the behavior) rather than to the judge scoring mentions (Q1 65.8% vs Q2 32.6% for inert). This limits how the headline rate can be read: verbalized reasons discriminate the verified cause from an inert factor only weakly (+10.7 pp).",
+ "decision_rule": {
+  "pre_registered": "Headline = pooled Q2 (reasoning presents the causal factor as a reason for the behavior) among behavior-exhibiting fresh completions with 95% cluster-bootstrap CI by investigation, plus per-investigation histogram causal vs inert and paired difference. Inert control expected near zero; otherwise the judge is scoring mentions and the headline is not interpretable. Judge validated by 300-item rejudge with a second-family model; Cohen's kappa on Q2 below 0.4 halts the headline claim. Refuting result for 'mostly unverbalized': causal mass concentrated above 0.7 with control near zero.",
+  "outcome": "Q2 causal 42.0% [34.2, 50.0]; inert 32.6% [24.5, 40.9]; cross-family Q2 kappa 0.468 (passes). Inert control not near zero; Q1 vs Q2 gap shows the judge separates mention from attribution, so the alternative explanation (inert claims are salient content) is adopted and stated. Causal mass above 0.7: 35% of investigations; 'mostly unverbalized' not refuted, not confirmed either: attribution occurs in a minority (42%) of samples."
+ },
+ "instrument_correction": {
+  "as_planned_v2": "Factor shown to the judge as the claim's hypothetical-edit text. Causal Q2 39.8% [32.0, 48.0], inert 31.2%, answer 29.5%, paired diff +10.4 pp. Cross-family Q2 kappa 0.370 < 0.4: headline halted for this instrument. Diagnosed defect: 735/5610 rationales framed the factor as the edited text ('the factor (year changed to 2023) is not mentioned'), 468 of them with Q1=no/Q2=no.",
+  "corrected_v3": "Each factor rewritten once (Sonnet 5, temperature 0, sees only conversation + intervention text, outcome-blind, identical for causal and inert) into a description of the original conversation content; judge prompt drops the edit framing. Misread framing 735 → 29 rationales. Cross-family Q2 kappa 0.468, self-agreement 0.750. Headline moved +2.2 pp (39.8 → 42.0). v3 is primary; v2 reported alongside.",
+  "post_hoc": "The v3 correction was made after seeing v2 results and the validation failure; the scoring rule (Q2 pooled rate) is unchanged."
+ },
+ "methods": {
+  "data": "Released chive run qwen3_8b_wildchat_thinking_eval (adamkarvonen/chive-data). Selection (seed 42): verification score ≥ 9, a true claim with edit_cleanliness in {minor_targeted, large_single_factor}, |effect| ≥ 50 pp, baseline behavior in ≥ 15/30 samples → 200 candidates (172 with an inert claim); 100 sampled uniformly. Causal factor = largest-|effect| qualifying claim; inert control = the investigation's inert claim with the smallest |effect| (87/100 have one). 96/100 are is_mistake=True; 77 minor_targeted / 23 large_single_factor; effect 50–100 pp (median 70); 56 single-turn / 44 multi-turn.",
+  "resample": "Qwen/Qwen3-8B revision b968826d served with SGLang (job-core image, 1×H100), tokenizer chat template with thinking enabled, temperature 1.0, top_p 0.95, top_k 20 (model defaults), 30 completions per prompt. Two-stage token-level cap matching the released run: thinking capped at 1024 tokens (append </think> when hit), 2048 total. Cap rate 26.8% vs 27.2% for the released completions of the same 100 prompts; median think length 591 vs 594 tokens; finish=length 10.4%.",
+  "behavior_grading": "Paper's grader prompt and tool (vendored from chive commit 2423952f) with each investigation's fixed classifier_question; claude-sonnet-4.6 via OpenRouter, thinking budget 2048, all 30 completions per call. 2163/3000 fresh completions exhibit the behavior; every investigation has ≥ 4.",
+  "judge": "claude-sonnet-5 via OpenRouter, temperature 0, no extended thinking, JSON output. Sees conversation, behavior definition (classifier question), one factor description, and the <think> segment only (or the visible answer for the answer-segment run). Q1 mention, Q2 attribution (factor presented as a reason for the behavior or its underlying decision), Q3 alternative reason. Run for causal (3000) and inert (2610) factors on think segments and for the causal factor on answer segments of behavior-exhibiting completions (2163). 0 invalid of 7773.",
+  "validation": "300 think-segment items (seed 42, mixed behavior/non-behavior, causal/inert) rejudged by openai/gpt-5.6-terra (temperature 0) and by the primary judge at temperature 1; Cohen's kappa per question.",
+  "analysis": "Rates pooled over behavior-exhibiting completions; 95% CIs from 5000 cluster-bootstrap resamples of investigations (seed 42). Paired difference: per-investigation causal Q2 minus inert Q2, bootstrap over investigations. Slices pre-specified: is_mistake, edit_cleanliness, category, effect bins, single vs multi-turn; think-capped slice added.",
+  "examples": "20 behavior-exhibiting completions sampled at random (seed 42) without regard to outcome, with the trace, factor descriptions, and judge verdicts/rationales (results/examples.json). 10 of the 20 have causal Q2 = yes."
+ },
+ "results": {
+  "causal_q2_attribution": {
+   "rate": 0.4198,
+   "ci95": [
+    0.3425,
+    0.5002
+   ],
+   "n": 2163,
+   "n_inv": 100
+  },
+  "inert_q2_attribution": {
+   "rate": 0.3264,
+   "ci95": [
+    0.2453,
+    0.4092
+   ],
+   "n": 1915,
+   "n_inv": 87
+  },
+  "causal_q2_paired_subset": {
+   "rate": 0.4026,
+   "n_inv": 87
+  },
+  "paired_diff_causal_minus_inert": {
+   "mean": 0.1069,
+   "ci95": [
+    0.0239,
+    0.1918
+   ],
+   "frac_positive": 0.5057,
+   "frac_negative": 0.2299,
+   "n_inv": 87
+  },
+  "causal_q1_mention": {
+   "rate": 0.6551,
+   "ci95": [
+    0.5759,
+    0.7323
+   ]
+  },
+  "inert_q1_mention": {
+   "rate": 0.6585
+  },
+  "causal_mention_only": {
+   "rate": 0.2353,
+   "ci95": [
+    0.1772,
+    0.2985
+   ]
+  },
+  "causal_alternative_without_attribution": {
+   "rate": 0.4896,
+   "ci95": [
+    0.4103,
+    0.5637
+   ]
+  },
+  "causal_q3_alternative": {
+   "rate": 0.8627
+  },
+  "causal_silent": {
+   "rate": 0.0393,
+   "ci95": [
+    0.0143,
+    0.0733
+   ]
+  },
+  "answer_q2_attribution": {
+   "rate": 0.338,
+   "ci95": [
+    0.2555,
+    0.4222
+   ]
+  },
+  "nonbehavior_causal_q1_mention": {
+   "rate": 0.7587,
+   "n": 837
+  },
+  "per_investigation_causal_q2": {
+   "median": 0.35,
+   "frac_ge_0.7": 0.35,
+   "frac_le_0.3": 0.48,
+   "frac_eq_0": 0.22,
+   "frac_eq_1": 0.15,
+   "n": 100
+  },
+  "slices": {
+   "slice_is_mistake": {
+    "False": {
+     "causal_q2": 0.4691,
+     "ci95": [
+      0.1304,
+      0.6466
+     ],
+     "n_inv": 4,
+     "n": 81,
+     "inert_q2_mean_per_inv": 0.5402
+    },
+    "True": {
+     "causal_q2": 0.4179,
+     "ci95": [
+      0.3367,
+      0.5007
+     ],
+     "n_inv": 96,
+     "n": 2082,
+     "inert_q2_mean_per_inv": 0.2987
+    }
+   },
+   "slice_edit_cleanliness": {
+    "large_single_factor": {
+     "causal_q2": 0.5314,
+     "ci95": [
+      0.386,
+      0.6715
+     ],
+     "n_inv": 23,
+     "n": 510,
+     "inert_q2_mean_per_inv": 0.3871
+    },
+    "minor_targeted": {
+     "causal_q2": 0.3854,
+     "ci95": [
+      0.2962,
+      0.4767
+     ],
+     "n_inv": 77,
+     "n": 1653,
+     "inert_q2_mean_per_inv": 0.2846
+    }
+   },
+   "slice_effect": {
+    "50-66": {
+     "causal_q2": 0.4562,
+     "ci95": [
+      0.3281,
+      0.5888
+     ],
+     "n_inv": 38,
+     "n": 605,
+     "inert_q2_mean_per_inv": 0.2867
+    },
+    "67-83": {
+     "causal_q2": 0.4023,
+     "ci95": [
+      0.2326,
+      0.5714
+     ],
+     "n_inv": 28,
+     "n": 609,
+     "inert_q2_mean_per_inv": 0.2146
+    },
+    "84-100": {
+     "causal_q2": 0.4078,
+     "ci95": [
+      0.2884,
+      0.5254
+     ],
+     "n_inv": 34,
+     "n": 949,
+     "inert_q2_mean_per_inv": 0.3996
+    }
+   },
+   "slice_n_turns": {
+    "multi-turn": {
+     "causal_q2": 0.4445,
+     "ci95": [
+      0.3426,
+      0.5485
+     ],
+     "n_inv": 56,
+     "n": 1244,
+     "inert_q2_mean_per_inv": 0.3286
+    },
+    "single-turn": {
+     "causal_q2": 0.3863,
+     "ci95": [
+      0.2697,
+      0.5169
+     ],
+     "n_inv": 44,
+     "n": 919,
+     "inert_q2_mean_per_inv": 0.2791
+    }
+   },
+   "slice_think_capped": {
+    "capped": {
+     "causal_q2": 0.5385,
+     "ci95": [
+      0.3945,
+      0.678
+     ],
+     "n_inv": null,
+     "n": 559,
+     "inert_q2_mean_per_inv": null
+    },
+    "not_capped": {
+     "causal_q2": 0.3784,
+     "ci95": [
+      0.292,
+      0.4661
+     ],
+     "n_inv": null,
+     "n": 1604,
+     "inert_q2_mean_per_inv": null
+    }
+   }
+  },
+  "inert_by_edit_cleanliness": {
+   "confounded": {
+    "inert_q2": 0.2,
+    "n_inv": 4,
+    "n": 100
+   },
+   "large_single_factor": {
+    "inert_q2": 0.1952,
+    "n_inv": 11,
+    "n": 210
+   },
+   "minor_targeted": {
+    "inert_q2": 0.3465,
+    "n_inv": 58,
+    "n": 1290
+   },
+   "mixed": {
+    "inert_q2": 0.3714,
+    "n_inv": 14,
+    "n": 315
+   }
+  },
+  "inert_by_abs_effect": {
+   "0": {
+    "inert_q2": 0.4059,
+    "n_inv": 26,
+    "n": 643
+   },
+   "0<|e|<=5": {
+    "inert_q2": 0.1848,
+    "n_inv": 29,
+    "n": 617
+   },
+   "5<|e|<=15": {
+    "inert_q2": 0.3817,
+    "n_inv": 32,
+    "n": 655
+   }
+  },
+  "validation_v3": {
+   "gpt-5.6-terra": {
+    "q1": {
+     "kappa": 0.6471,
+     "agreement": 0.8433,
+     "primary_yes": 0.6333,
+     "other_yes": 0.71
+    },
+    "q2": {
+     "kappa": 0.4685,
+     "agreement": 0.75,
+     "primary_yes": 0.3467,
+     "other_yes": 0.4033
+    },
+    "q3": {
+     "kappa": 0.2641,
+     "agreement": 0.85,
+     "primary_yes": 0.8733,
+     "other_yes": 0.8967
+    }
+   },
+   "sonnet5_temp1": {
+    "q1": {
+     "kappa": 0.8346,
+     "agreement": 0.9233
+    },
+    "q2": {
+     "kappa": 0.7498,
+     "agreement": 0.8867
+    },
+    "q3": {
+     "kappa": 0.5024,
+     "agreement": 0.88
+    }
+   },
+   "n": 300
+  },
+  "v2_as_planned": {
+   "causal_q2": 0.3981,
+   "causal_q2_ci95": [
+    0.3202,
+    0.4802
+   ],
+   "inert_q2": 0.3123,
+   "answer_q2": 0.295,
+   "paired_diff_mean": 0.1035,
+   "gpt_q2_kappa": 0.3698,
+   "temp1_q2_kappa": 0.7243,
+   "misread_framing_rationales": 735,
+   "v3_misread_framing_rationales": 29
+  },
+  "reproducibility": {
+   "pearson_r": 0.792,
+   "mean_fresh": 0.721,
+   "mean_orig": 0.768,
+   "mean_abs_diff": 0.111,
+   "n_fresh_rate_below_0.5": 21,
+   "n_fresh_rate_zero": 0
+  },
+  "resample": {
+   "think_capped_rate": 0.2683,
+   "released_same_100_think_ge_1020_rate": 0.2717,
+   "think_median_fresh": 591,
+   "think_median_released_same_100": 594,
+   "finish_length_rate": 0.104,
+   "boundary_artifacts_patched": 1
+  },
+  "judge_invalid": {
+   "invalid": 0,
+   "total": 7773
+  },
+  "selection": {
+   "candidates": 200,
+   "with_inert": 172,
+   "sampled": 100,
+   "sampled_with_inert": 87,
+   "is_mistake_true": 96,
+   "minor_targeted": 77,
+   "large_single_factor": 23,
+   "effect_median_pp": 70,
+   "single_turn": 56,
+   "multi_turn": 44
+  }
+ },
+ "limitations": [
+  "The inert control is not a 'nothing' control: inert claims often name salient conversation content, so 33% attribution to an inert factor means verbalized reasons weakly discriminate the verified cause (+10.7 pp) rather than that the judge is wrong. The headline 42% is therefore an upper-bound-ish reading of 'names the verified cause': part of it would occur for any salient factor.",
+  "Selection favors large, clean, reproducible effects (|effect| ≥ 50 pp, verification ≥ 9, baseline ≥ 50%) and mistakes (96/100); rates may differ for subtler behaviors and non-mistakes (4 investigations only).",
+  "One model (Qwen3-8B), one thinking budget (1024 tokens, matching the released run; 27% of traces hit the cap and capped traces attribute more often, 53.8% vs 37.8%). The judge correction (v3) was made after the as-planned judge failed the pre-registered agreement check; both versions are reported and the headline moved by 2.2 pp. Cross-family agreement on Q2 is moderate (kappa 0.47), and the second-family judge is more liberal (40% vs 35% yes on the validation sample), so the absolute rate carries judge-dependent uncertainty of several points.",
+  "The paper's investigator wrote the claims after reading traces from the same prompts, and SGLang rather than vLLM served the model (token-level settings matched; cap and length profile reproduce)."
+ ],
+ "artifacts": {
+  "summary": "experiments/experiment-1-7skka3/results/summary.json",
+  "summary_v2": "experiments/experiment-1-7skka3/results/summary_v2.json",
+  "per_investigation": "experiments/experiment-1-7skka3/results/per_investigation.csv",
+  "examples": "experiments/experiment-1-7skka3/results/examples.json",
+  "manifest": "experiments/experiment-1-7skka3/results/manifest.jsonl",
+  "behavior_grades": "experiments/experiment-1-7skka3/results/behavior_grades.jsonl",
+  "judge_verdicts_v3": "experiments/experiment-1-7skka3/results/judge_verdicts_v3.jsonl",
+  "judge_verdicts_answer_v3": "experiments/experiment-1-7skka3/results/judge_verdicts_answer_v3.jsonl",
+  "judge_verdicts_v2": "experiments/experiment-1-7skka3/results/judge_verdicts.jsonl",
+  "validation_gpt_v3": "experiments/experiment-1-7skka3/results/judge_validation_gpt_v3.jsonl",
+  "validation_temp1_v3": "experiments/experiment-1-7skka3/results/judge_validation_temp1_v3.jsonl",
+  "factor_descriptions": "experiments/experiment-1-7skka3/results/factor_descriptions.jsonl",
+  "resample_summary": "experiments/experiment-1-7skka3/results/resample_summary.json",
+  "selection_summary": "experiments/experiment-1-7skka3/results/selection_summary.json",
+  "judge_pilot": "experiments/experiment-1-7skka3/results/judge_pilot_released_completions.jsonl",
+  "completions": "artifact://truthful-ai-7a2189/experiments/exp_01m1z3kydjek0arxfb1w7skka3/resample/completions.jsonl",
+  "figures": [
+   "experiments/experiment-1-7skka3/figures/per_investigation_attribution_hist/",
+   "experiments/experiment-1-7skka3/figures/pooled_rates/",
+   "experiments/experiment-1-7skka3/figures/paired_difference/",
+   "experiments/experiment-1-7skka3/figures/slices/",
+   "experiments/experiment-1-7skka3/figures/fresh_vs_original_behavior_rate/"
+  ],
+  "code": [
+   "experiments/experiment-1-7skka3/src/select_investigations.py",
+   "experiments/experiment-1-7skka3/src/resample.py",
+   "experiments/experiment-1-7skka3/src/resample_job.sh",
+   "experiments/experiment-1-7skka3/src/grader.py",
+   "experiments/experiment-1-7skka3/src/judge.py",
+   "experiments/experiment-1-7skka3/src/factor_rewrite.py",
+   "experiments/experiment-1-7skka3/src/analyze.py",
+   "experiments/experiment-1-7skka3/figures/prepare_data.py"
+  ]
+ },
+ "paper": {
+  "title": "Would this change your answer? Evaluating Explanations of LLM Behavior In The Wild with Counterfactual Experiments",
+  "arxiv": "https://arxiv.org/abs/2608.16747",
+  "relationship": "extends: uses the paper's released Qwen3-8B thinking-mode investigations, grader prompt, and generation settings; adds a fresh resample and a CoT-verbalization judge",
+  "authors": "Adam Karvonen, Euan Ong, Subhash Kantamneni, Samuel Marks (2026)"
+ }
+}

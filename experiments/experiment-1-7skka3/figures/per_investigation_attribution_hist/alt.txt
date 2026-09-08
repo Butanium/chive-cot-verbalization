@@ -1,0 +1,1 @@
+Grouped histogram of per-investigation attribution rates for the causal factor and the inert factor; both distributions are spread across the whole range with a mode at 0–0.1.

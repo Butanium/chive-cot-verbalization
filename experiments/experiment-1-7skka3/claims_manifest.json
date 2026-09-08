@@ -1,0 +1,298 @@
+{
+ "claims": [
+  {
+   "claim": "Reasoning attributes the behavior to the causal factor in 42.0% of behavior-exhibiting completions",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_q2_attribution.rate",
+   "value": 0.41978733240869165
+  },
+  {
+   "claim": "95% CI for causal attribution 34.2–50.0%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_q2_attribution.ci95",
+   "value": [
+    0.34249003101462117,
+    0.5002344116268167
+   ]
+  },
+  {
+   "claim": "2163 behavior-exhibiting completions across 100 investigations",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "n_behavior_exhibiting",
+   "value": 2163
+  },
+  {
+   "claim": "Inert-factor attribution 32.6% (CI 24.5–40.9%), 87 investigations, 1915 completions",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "inert_q2_attribution",
+   "value": {
+    "rate": 0.3263707571801567,
+    "ci95": [
+     0.24532453245324531,
+     0.4092292089249493
+    ],
+    "n": 1915,
+    "n_inv": 87
+   }
+  },
+  {
+   "claim": "Causal attribution on the 87 paired investigations 40.3%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_q2_attribution_paired_subset.rate",
+   "value": 0.40261096605744123
+  },
+  {
+   "claim": "Paired difference causal minus inert +10.7 pp (CI 2.4–19.2); positive in 51% and negative in 23% of investigations",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "paired_diff_causal_minus_inert",
+   "value": {
+    "mean": 0.10689863183988892,
+    "ci95": [
+     0.023945728317163288,
+     0.1918175003461969
+    ],
+    "n_inv": 87,
+    "frac_positive": 0.5057471264367817,
+    "frac_negative": 0.22988505747126436
+   }
+  },
+  {
+   "claim": "Causal factor mentioned (Q1) in 65.5%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_q1_mention.rate",
+   "value": 0.6551086453999075
+  },
+  {
+   "claim": "Inert factor mentioned (Q1) in 65.8%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "inert_q1_mention.rate",
+   "value": 0.658485639686684
+  },
+  {
+   "claim": "Mention without attribution 23.5%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_mention_only.rate",
+   "value": 0.2353213129912159
+  },
+  {
+   "claim": "Alternative reason without attributing to the causal factor 49.0%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_alternative_without_attribution.rate",
+   "value": 0.4895977808599168
+  },
+  {
+   "claim": "Some reason given (Q3) 86.3%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_q3_alternative.rate",
+   "value": 0.8626907073509015
+  },
+  {
+   "claim": "No reason at all 3.9%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "causal_silent.rate",
+   "value": 0.039297272306981046
+  },
+  {
+   "claim": "Visible answer attributes behavior to causal factor 33.8% (CI 25.5–42.2%)",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "answer_q2_attribution",
+   "value": {
+    "rate": 0.337956541840037,
+    "ci95": [
+     0.2554502369668246,
+     0.4222222222222222
+    ],
+    "n": 2163,
+    "n_inv": 100
+   }
+  },
+  {
+   "claim": "Non-behavior completions mention the causal factor 75.9% (n=837)",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "nonbehavior_causal_q1_mention",
+   "value": {
+    "rate": 0.7586618876941458,
+    "ci95": [
+     0.6706586826347305,
+     0.8356456776947705
+    ],
+    "n": 837
+   }
+  },
+  {
+   "claim": "Per-investigation causal attribution: median 0.35, 22% at 0, 15% at 1, 35% ≥ 0.7, 48% ≤ 0.3",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "per_investigation_causal_q2",
+   "value": {
+    "median": 0.35,
+    "frac_ge_0.7": 0.35,
+    "frac_le_0.3": 0.48,
+    "frac_eq_0": 0.22,
+    "frac_eq_1": 0.15,
+    "n": 100
+   }
+  },
+  {
+   "claim": "Mistakes (96 inv) 41.8% vs non-mistakes (4 inv) 46.9%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "slice_is_mistake",
+   "value": {
+    "False": 0.4691358024691358,
+    "True": 0.41786743515850144
+   }
+  },
+  {
+   "claim": "large_single_factor (23 inv) 53.1% vs minor_targeted (77 inv) 38.5%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "slice_edit_cleanliness",
+   "value": {
+    "large_single_factor": 0.5313725490196078,
+    "minor_targeted": 0.3853599516031458
+   }
+  },
+  {
+   "claim": "Effect bins 50–66: 45.6%, 67–83: 40.2%, 84–100: 40.8%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "slice_effect",
+   "value": {
+    "50-66": 0.456198347107438,
+    "67-83": 0.40229885057471265,
+    "84-100": 0.4077976817702845
+   }
+  },
+  {
+   "claim": "Multi-turn 44.5% vs single-turn 38.6%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "slice_n_turns",
+   "value": {
+    "multi-turn": 0.4445337620578778,
+    "single-turn": 0.3862894450489663
+   }
+  },
+  {
+   "claim": "Think-capped completions 53.8% vs uncapped 37.8%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "slice_think_capped",
+   "value": {
+    "capped": 0.5384615384615384,
+    "not_capped": 0.378428927680798
+   }
+  },
+  {
+   "claim": "Inert attribution by inert edit type: large_single_factor 19.5%, minor_targeted 34.7%, mixed 37.1%, confounded 20.0%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "inert_by_edit_cleanliness",
+   "value": {
+    "confounded": 0.2,
+    "large_single_factor": 0.19523809523809524,
+    "minor_targeted": 0.34651162790697676,
+    "mixed": 0.37142857142857144
+   }
+  },
+  {
+   "claim": "Inert attribution by |effect|: 0 pp 40.6%, (0,5] 18.5%, (5,15] 38.2%",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "inert_by_abs_effect",
+   "value": {
+    "0": 0.4059097978227061,
+    "0<|e|<=5": 0.1847649918962723,
+    "5<|e|<=15": 0.3816793893129771
+   }
+  },
+  {
+   "claim": "Cross-family Q2 kappa 0.468 (agreement 75.0%; GPT yes 40.3% vs Sonnet 34.7%), Q1 0.647, Q3 0.264",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "validation_second_family",
+   "value": {
+    "q1": 0.6471471471471473,
+    "q2": 0.46848719644713216,
+    "q3": 0.26406454426515474
+   }
+  },
+  {
+   "claim": "Self-agreement at temperature 1: Q1 0.835, Q2 0.750, Q3 0.502",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "validation_self_temp1",
+   "value": {
+    "q1": 0.8346116970278044,
+    "q2": 0.7498037676609106,
+    "q3": 0.5023958717287137
+   }
+  },
+  {
+   "claim": "Judge invalid outputs 0 of 7773",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "judge_invalid,judge_total",
+   "value": [
+    0,
+    7773
+   ]
+  },
+  {
+   "claim": "Fresh behavior rate 72.1% vs 76.8% original; r = 0.79; mean abs diff 11.1 pp; no investigation at zero",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "reproducibility",
+   "value": {
+    "pearson_r": 0.7919725833522516,
+    "mean_fresh": 0.721,
+    "mean_orig": 0.768,
+    "mean_abs_diff": 0.111,
+    "n_fresh_rate_below_0.5": 21,
+    "n_fresh_rate_zero": 0
+   }
+  },
+  {
+   "claim": "As-planned judge (v2): causal 39.8% [32.0, 48.0], inert 31.2%, answer 29.5%, paired diff +10.4 pp",
+   "source": "experiments/experiment-1-7skka3/results/summary_v2.json",
+   "key": "causal_q2_attribution,inert_q2_attribution,answer_q2_attribution,paired_diff_causal_minus_inert.mean",
+   "value": [
+    0.39805825242718446,
+    0.3122715404699739,
+    0.29496070272769304,
+    0.10354891511326265
+   ]
+  },
+  {
+   "claim": "As-planned judge cross-family Q2 kappa 0.370, self-agreement 0.724",
+   "source": "experiments/experiment-1-7skka3/results/summary_v2.json",
+   "key": "validation_second_family.q2.kappa,validation_self_temp1.q2.kappa",
+   "value": [
+    0.3698048427900251,
+    0.7243210128650195
+   ]
+  },
+  {
+   "claim": "735 of 5610 v2 rationales and 29 of 5610 v3 rationales use the edit-misreading framing",
+   "source": "experiments/experiment-1-7skka3/results/judge_verdicts.jsonl; experiments/experiment-1-7skka3/results/judge_verdicts_v3.jsonl",
+   "key": "regex hypothetical|not applied|NOT used|was not used|edited version|modified version over q1_rationale,q2_rationale",
+   "value": [
+    735,
+    29
+   ]
+  },
+  {
+   "claim": "Fresh think-cap rate 26.8% vs 27.2% released (same 100 prompts); median think tokens 591 vs 594; finish=length 10.4%",
+   "source": "experiments/experiment-1-7skka3/results/resample_summary.json",
+   "key": "fresh.think_capped_rate,released_same_100_prompts.think_ge_1020_rate,fresh.think_tokens_median,released_same_100_prompts.think_tokens_median,fresh.finish_length_rate",
+   "value": [
+    0.2683,
+    0.2717,
+    591,
+    594,
+    0.104
+   ]
+  },
+  {
+   "claim": "Selection: 200 candidates, 172 with inert claim, 100 sampled, 87 with inert; 96 mistakes; 77 minor_targeted/23 large_single_factor; effect median 70 pp; 56 single/44 multi-turn",
+   "source": "experiments/experiment-1-7skka3/results/selection_summary.json",
+   "key": "*",
+   "value": "see file"
+  },
+  {
+   "claim": "10 of the 20 random examples have causal Q2 = yes",
+   "source": "experiments/experiment-1-7skka3/results/examples.json",
+   "key": "causal_verdicts.q2 count",
+   "value": 10
+  }
+ ]
+}

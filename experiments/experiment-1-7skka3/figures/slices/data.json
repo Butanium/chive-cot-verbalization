@@ -1,0 +1,115 @@
+{
+  "rows": [
+    {
+      "group": "edit type",
+      "label": "large single-factor edit (23 inv)",
+      "causal_q2": 0.5313725490196078,
+      "lo": 0.3859964093357271,
+      "hi": 0.6714876033057852,
+      "inert_q2_mean_per_inv": 0.3871467556921298,
+      "n": 510,
+      "n_inv": 23
+    },
+    {
+      "group": "edit type",
+      "label": "minor targeted edit (77 inv)",
+      "causal_q2": 0.3853599516031458,
+      "lo": 0.2962085308056872,
+      "hi": 0.4766961651917404,
+      "inert_q2_mean_per_inv": 0.2846042382955181,
+      "n": 1653,
+      "n_inv": 77
+    },
+    {
+      "group": "effect size (pp)",
+      "label": "50-66 (38 inv)",
+      "causal_q2": 0.456198347107438,
+      "lo": 0.3280757097791798,
+      "hi": 0.5887708649468892,
+      "inert_q2_mean_per_inv": 0.28667374113388044,
+      "n": 605,
+      "n_inv": 38
+    },
+    {
+      "group": "effect size (pp)",
+      "label": "67-83 (28 inv)",
+      "causal_q2": 0.40229885057471265,
+      "lo": 0.23255813953488372,
+      "hi": 0.5714285714285714,
+      "inert_q2_mean_per_inv": 0.21455267986127557,
+      "n": 609,
+      "n_inv": 28
+    },
+    {
+      "group": "effect size (pp)",
+      "label": "84-100 (34 inv)",
+      "causal_q2": 0.4077976817702845,
+      "lo": 0.2883625128733265,
+      "hi": 0.5254413291796469,
+      "inert_q2_mean_per_inv": 0.39955008159002936,
+      "n": 949,
+      "n_inv": 34
+    },
+    {
+      "group": "conversation",
+      "label": "multi-turn (56 inv)",
+      "causal_q2": 0.4445337620578778,
+      "lo": 0.34261407579273007,
+      "hi": 0.548469387755102,
+      "inert_q2_mean_per_inv": 0.32862924145471645,
+      "n": 1244,
+      "n_inv": 56
+    },
+    {
+      "group": "conversation",
+      "label": "single-turn (44 inv)",
+      "causal_q2": 0.3862894450489663,
+      "lo": 0.26965065502183405,
+      "hi": 0.5168884339815762,
+      "inert_q2_mean_per_inv": 0.27910641397275243,
+      "n": 919,
+      "n_inv": 44
+    },
+    {
+      "group": "is a mistake",
+      "label": "not a mistake (4 inv)",
+      "causal_q2": 0.4691358024691358,
+      "lo": 0.13043478260869565,
+      "hi": 0.646551724137931,
+      "inert_q2_mean_per_inv": 0.5402298850574713,
+      "n": 81,
+      "n_inv": 4
+    },
+    {
+      "group": "is a mistake",
+      "label": "mistake (96 inv)",
+      "causal_q2": 0.41786743515850144,
+      "lo": 0.33672055427251735,
+      "hi": 0.5007496251874063,
+      "inert_q2_mean_per_inv": 0.29866889175087247,
+      "n": 2082,
+      "n_inv": 96
+    },
+    {
+      "group": "thinking cap",
+      "label": "thinking hit 1024-token cap (559 compl.)",
+      "causal_q2": 0.5384615384615384,
+      "lo": 0.3944954128440367,
+      "hi": 0.6780045351473923,
+      "inert_q2_mean_per_inv": null,
+      "n": 559,
+      "n_inv": null
+    },
+    {
+      "group": "thinking cap",
+      "label": "thinking ended naturally (1604 compl.)",
+      "causal_q2": 0.378428927680798,
+      "lo": 0.29198813056379824,
+      "hi": 0.46611253196930946,
+      "inert_q2_mean_per_inv": null,
+      "n": 1604,
+      "n_inv": null
+    }
+  ],
+  "overall_causal_q2": 0.41978733240869165
+}

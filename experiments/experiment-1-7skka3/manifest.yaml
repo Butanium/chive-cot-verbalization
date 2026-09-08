@@ -2,8 +2,40 @@ experiment: 1
 eid: "exp_01m1z3kydjek0arxfb1w7skka3"
 title: "How often Qwen3-8B's chain of thought verbalizes the verified cause of its behavior"
 date: "2026-09-07"
-status: in-progress
-data: {}
-outputs: {}
-results: {}
-slurm_jobs: []
+status: complete
+data:
+  chive_run: "adamkarvonen/chive-data qwen3_8b_wildchat_thinking_eval (investigations, verification, mechanism_concreteness, eval_set_conc3_n2000)"
+  manifest: "results/manifest.jsonl (100 investigations, seed 42)"
+outputs:
+  fresh_completions: "artifact://truthful-ai-7a2189/experiments/exp_01m1z3kydjek0arxfb1w7skka3/resample/completions.jsonl"
+  behavior_grades: "results/behavior_grades.jsonl"
+  judge_verdicts_primary: "results/judge_verdicts_v3.jsonl"
+  judge_verdicts_answer_primary: "results/judge_verdicts_answer_v3.jsonl"
+  judge_verdicts_as_planned: "results/judge_verdicts.jsonl"
+  summary: "results/summary.json"
+  summary_as_planned: "results/summary_v2.json"
+  per_investigation: "results/per_investigation.csv"
+  examples: "results/examples.json"
+results:
+  causal_q2_attribution: 0.4198
+  causal_q2_ci95: [0.3425, 0.5002]
+  inert_q2_attribution: 0.3264
+  inert_q2_ci95: [0.2453, 0.4092]
+  paired_diff_causal_minus_inert_pp: 10.7
+  answer_q2_attribution: 0.3380
+  cross_family_q2_kappa: 0.468
+  self_agreement_q2_kappa: 0.750
+  fresh_behavior_rate: 0.721
+  original_behavior_rate: 0.768
+  as_planned_v2_causal_q2: 0.3981
+  as_planned_v2_cross_family_q2_kappa: 0.370
+slurm_jobs:
+  - id: "940569256367"
+    kind: on-demand
+    image: job-core
+    gpus: "1xH100"
+    elapsed: "18m"
+    purpose: "resample 100 prompts x 30 completions"
+  - id: "745183599820"
+    kind: on-demand
+    status: "failed before entrypoint (infrastructure), retried unchanged as 940569256367"
