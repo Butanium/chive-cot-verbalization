@@ -1,24 +1,24 @@
 {
- "title": "Qwen3-8B's chain of thought names the verified cause of its behavior in about 42% of samples; an inert factor is named as a cause in 33%",
- "headline": "Across 100 Qwen3-8B thinking-mode behaviors whose cause was pinned down by a verified counterfactual (96 of them mistakes), the reasoning trace attributes the behavior to that causal factor in 42.0% of behavior-exhibiting samples (95% cluster-bootstrap CI 34.2–50.0%, 2163 completions). The same judgment made for an inert factor from the same investigation yields 32.6% (CI 24.5–40.9%, 87 investigations); the paired difference is +10.7 pp (CI 2.4–19.2). The per-investigation distribution is spread across the whole range (22% of investigations never verbalize the cause, 15% always do). In 49% of behavior-exhibiting samples the reasoning gives a different reason and does not name the verified cause.",
+ "title": "Qwen3-8B reasoning names the verified cause of its behavior only 10.7 pp more often than an inert factor; the 42% raw attribution rate is an upper bound",
+ "headline": "Across 100 Qwen3-8B thinking-mode behaviors whose cause was pinned down by a verified counterfactual (96 of them mistakes), the reasoning trace attributes the behavior to that causal factor in 42.0% of behavior-exhibiting samples (95% cluster-bootstrap CI 34.2–50.0%, 2163 completions). The same judgment for an inert factor from the same conversation (an edit that did not change the behavior) yields 32.6% (CI 24.5–40.9%, 87 investigations), and 40.6% (CI 25.6–56.2%) on the 26 investigations whose inert factor had exactly 0 pp effect, against 42.1% for the causal factor on those same investigations. The supportable claim is therefore the paired one: attribution to the verified cause exceeds attribution to an inert factor by +10.7 pp (CI 2.4–19.2) pooled over 87 pairs, and by +2.9 pp (CI -13.9–18.5) on the zero-effect subset. Causal and inert per-investigation rates correlate (r = 0.45) and the inert rate is at least as high as the causal rate in 43 of 87 pairs, so the 42% is an upper bound on how often the trace verbalizes the verified cause: much of it would be scored for any salient factor in the conversation. Per investigation, the causal rate is spread over the whole range (22.0% of investigations never attribute to the cause, 15.0% always do); the inert distribution is lower (33.3% at zero, 6.9% at one) but 3 of the 15 'always' investigations also attribute to their inert factor in every sample. In 49.0% of behavior-exhibiting samples the reasoning gives a different reason and does not name the verified cause.",
  "assessment": "partial_signal",
- "assessment_rationale": "The primary measurement (pooled Q2 rate, cluster-bootstrap CI) was obtained with a judge that passes the pre-registered cross-family agreement check (Q2 kappa 0.468 ≥ 0.4) and the behavior reproduces (fresh rate 72.1% vs 76.8% original, r = 0.79). The plan's refuting pattern (causal mass above 0.7 with control near zero) did not occur: the causal-factor distribution is spread out with median 0.35, so the 'mostly unverbalized' reading is not refuted. However the pre-registered inert control did not behave as predicted (33%, not near zero); inspection attributes this to the inert claims themselves (they often name salient conversation content the reasoning cites as a reason even though editing it did not change the behavior) rather than to the judge scoring mentions (Q1 65.8% vs Q2 32.6% for inert). This limits how the headline rate can be read: verbalized reasons discriminate the verified cause from an inert factor only weakly (+10.7 pp).",
+ "assessment_rationale": "The primary measurement (pooled Q2 rate with a cluster-bootstrap CI) was obtained with a judge whose pooled cross-family Q2 kappa (0.468) clears the pre-registered 0.4 threshold and on the behavior/causal subset alone (kappa 0.467, n = 124), and the behavior reproduces (fresh rate 72.1% vs 76.8% original, r = 0.79). The plan pre-registered that an inert control not near zero makes the absolute rate uninterpretable as a verbalization rate; the control came out at 32.6% (40.6% for zero-effect inert factors), so the headline is restated around the paired difference (+10.7 pp, CI 2.4–19.2) and the 42% is reported as an upper bound. The plan's refuting pattern for 'mostly unverbalized' (causal mass above 0.7 with control near zero) did not occur. Three things inflate the control and are not separable with this design: same-span inert edits whose v3 descriptions overlap the causal description (14 to 8 of 87 pairs by description-overlap threshold; their mean paired difference is +7.3 to +3.7 pp vs +11.3 pp on the rest), judge false positives (cross-family Q2 kappa on the behavior/inert subset is 0.36, below 0.4; temperature-1 self-agreement 0.60 vs 0.82 on causal), and traces that cite a non-causal reason as their reason. The v3 judge prompt was redesigned after the as-planned v2 prompt failed the agreement check, and the 300-item validation set used to pass v3 is the same set on which the v2 defect was diagnosed, so the v3 kappa is not an independent test. Verdict: partial_signal. Verbalized reasons discriminate the verified cause from an inert factor, but weakly, and the absolute rate is judge- and control-dependent.",
  "decision_rule": {
   "pre_registered": "Headline = pooled Q2 (reasoning presents the causal factor as a reason for the behavior) among behavior-exhibiting fresh completions with 95% cluster-bootstrap CI by investigation, plus per-investigation histogram causal vs inert and paired difference. Inert control expected near zero; otherwise the judge is scoring mentions and the headline is not interpretable. Judge validated by 300-item rejudge with a second-family model; Cohen's kappa on Q2 below 0.4 halts the headline claim. Refuting result for 'mostly unverbalized': causal mass concentrated above 0.7 with control near zero.",
-  "outcome": "Q2 causal 42.0% [34.2, 50.0]; inert 32.6% [24.5, 40.9]; cross-family Q2 kappa 0.468 (passes). Inert control not near zero; Q1 vs Q2 gap shows the judge separates mention from attribution, so the alternative explanation (inert claims are salient content) is adopted and stated. Causal mass above 0.7: 35% of investigations; 'mostly unverbalized' not refuted, not confirmed either: attribution occurs in a minority (42%) of samples."
+  "outcome": "Q2 causal 42.0% [34.2, 50.0]; inert 32.6% [24.5, 40.9]; zero-effect inert 40.6%. Pooled cross-family Q2 kappa 0.468 (passes on pooled items and on the behavior/causal subset, 0.467; fails on the behavior/inert subset, 0.360). The inert control is not near zero, so by the pre-registered rule the absolute 42% is not interpretable as a verbalization rate; the headline is the paired difference (+10.7 pp [2.4, 19.2]; +2.9 pp [-13.9, 18.5] on the zero-effect subset) with 42% as an upper bound. Q1 vs Q2 gap (65.8% vs 32.6% for inert) shows the judge does separate mention from attribution, but the elevated control mixes same-span inert edits, judge false positives, and verbalized non-causal reasons. Causal mass above 0.7: 35% of investigations; 'mostly unverbalized' is neither refuted nor confirmed."
  },
  "instrument_correction": {
-  "as_planned_v2": "Factor shown to the judge as the claim's hypothetical-edit text. Causal Q2 39.8% [32.0, 48.0], inert 31.2%, answer 29.5%, paired diff +10.4 pp. Cross-family Q2 kappa 0.370 < 0.4: headline halted for this instrument. Diagnosed defect: 735/5610 rationales framed the factor as the edited text ('the factor (year changed to 2023) is not mentioned'), 468 of them with Q1=no/Q2=no.",
-  "corrected_v3": "Each factor rewritten once (Sonnet 5, temperature 0, sees only conversation + intervention text, outcome-blind, identical for causal and inert) into a description of the original conversation content; judge prompt drops the edit framing. Misread framing 735 → 29 rationales. Cross-family Q2 kappa 0.468, self-agreement 0.750. Headline moved +2.2 pp (39.8 → 42.0). v3 is primary; v2 reported alongside.",
-  "post_hoc": "The v3 correction was made after seeing v2 results and the validation failure; the scoring rule (Q2 pooled rate) is unchanged."
+  "as_planned_v2": "Factor shown to the judge as the claim's hypothetical-edit text. Causal Q2 39.8% [32.0, 48.0], inert 31.2%, answer 29.5%, paired diff +10.4 pp. Cross-family Q2 kappa 0.370 < 0.4: headline halted for this instrument. Diagnosed defect: 680/5610 items had a Q1 or Q2 rationale that framed the factor as the edited text ('the factor (year changed to 2023) is not mentioned').",
+  "corrected_v3": "Each factor rewritten once (Sonnet 5, temperature 0, sees only conversation + intervention text, outcome-blind, identical for causal and inert) into a description of the original conversation content; judge prompt drops the edit framing. Misread framing 680 → 29 items (regex over Q1 and Q2 rationales). Cross-family Q2 kappa 0.468 pooled (behavior/causal 0.467, behavior/inert 0.360, non-behavior 0.529); self-agreement 0.750. Headline moved +2.2 pp (39.8 → 42.0). v3 is primary; v2 reported alongside.",
+  "post_hoc": "The v3 correction was made after seeing v2 results and the validation failure; the scoring rule (Q2 pooled rate) is unchanged. The 300 validation items (seed 42) are identical for v2 and v3, and the v2 defect was diagnosed from Q2 disagreements on these items, so the v3 kappa of 0.468 is a pass on the set the redesign was tuned against, not an independent validation."
  },
  "methods": {
-  "data": "Released chive run qwen3_8b_wildchat_thinking_eval (adamkarvonen/chive-data). Selection (seed 42): verification score ≥ 9, a true claim with edit_cleanliness in {minor_targeted, large_single_factor}, |effect| ≥ 50 pp, baseline behavior in ≥ 15/30 samples → 200 candidates (172 with an inert claim); 100 sampled uniformly. Causal factor = largest-|effect| qualifying claim; inert control = the investigation's inert claim with the smallest |effect| (87/100 have one). 96/100 are is_mistake=True; 77 minor_targeted / 23 large_single_factor; effect 50–100 pp (median 70); 56 single-turn / 44 multi-turn.",
+  "data": "Released chive run qwen3_8b_wildchat_thinking_eval (adamkarvonen/chive-data). Selection (seed 42): verification score ≥ 9, a true claim with edit_cleanliness in {minor_targeted, large_single_factor}, |effect| ≥ 50 pp, baseline behavior in ≥ 15/30 samples → 200 candidates (172 with an inert claim); 100 sampled uniformly. Causal factor = largest-|effect| qualifying claim; inert control = the investigation's inert claim with the smallest |effect| (87/100 have one). 96/100 are is_mistake=True; 77 minor_targeted / 23 large_single_factor; effect 50–100 pp (median 70); 56 single-turn / 44 multi-turn. The inert claim is chosen by smallest |effect| only; it is not required to target a different span of the prompt than the causal claim, and by content-word Jaccard of the v3 descriptions 14 pairs overlap at >= 0.3 and 8 at >= 0.4.",
   "resample": "Qwen/Qwen3-8B revision b968826d served with SGLang (job-core image, 1×H100), tokenizer chat template with thinking enabled, temperature 1.0, top_p 0.95, top_k 20 (model defaults), 30 completions per prompt. Two-stage token-level cap matching the released run: thinking capped at 1024 tokens (append </think> when hit), 2048 total. Cap rate 26.8% vs 27.2% for the released completions of the same 100 prompts; median think length 591 vs 594 tokens; finish=length 10.4%.",
   "behavior_grading": "Paper's grader prompt and tool (vendored from chive commit 2423952f) with each investigation's fixed classifier_question; claude-sonnet-4.6 via OpenRouter, thinking budget 2048, all 30 completions per call. 2163/3000 fresh completions exhibit the behavior; every investigation has ≥ 4.",
   "judge": "claude-sonnet-5 via OpenRouter, temperature 0, no extended thinking, JSON output. Sees conversation, behavior definition (classifier question), one factor description, and the <think> segment only (or the visible answer for the answer-segment run). Q1 mention, Q2 attribution (factor presented as a reason for the behavior or its underlying decision), Q3 alternative reason. Run for causal (3000) and inert (2610) factors on think segments and for the causal factor on answer segments of behavior-exhibiting completions (2163). 0 invalid of 7773.",
-  "validation": "300 think-segment items (seed 42, mixed behavior/non-behavior, causal/inert) rejudged by openai/gpt-5.6-terra (temperature 0) and by the primary judge at temperature 1; Cohen's kappa per question.",
-  "analysis": "Rates pooled over behavior-exhibiting completions; 95% CIs from 5000 cluster-bootstrap resamples of investigations (seed 42). Paired difference: per-investigation causal Q2 minus inert Q2, bootstrap over investigations. Slices pre-specified: is_mistake, edit_cleanliness, category, effect bins, single vs multi-turn; think-capped slice added.",
+  "validation": "300 think-segment items (seed 42, mixed behavior/non-behavior, causal/inert) rejudged by openai/gpt-5.6-terra (temperature 0) and by the primary judge at temperature 1; Cohen's kappa per question. The same 300 items were used for the v2 and v3 judges; the v2 defect was diagnosed from Q2 disagreements on them. Kappas are also reported by subset (behavior/causal n = 124, behavior/inert n = 95, non-behavior n = 81; results/control_diagnostics.json).",
+  "analysis": "Rates pooled over behavior-exhibiting completions; 95% CIs from 5000 cluster-bootstrap resamples of investigations (seed 42). Paired difference: per-investigation causal Q2 minus inert Q2, bootstrap over investigations. Slices pre-specified: is_mistake, edit_cleanliness, category, effect bins, single vs multi-turn; think-capped slice added. Post-review diagnostics (src/control_diagnostics.py): zero-effect inert subset, causal vs inert per-investigation correlation, description overlap, subset kappas, slice CI overlap.",
   "examples": "20 behavior-exhibiting completions sampled at random (seed 42) without regard to outcome, with the trace, factor descriptions, and judge verdicts/rationales (results/examples.json). 10 of the 20 have causal Q2 = yes."
  },
  "results": {
@@ -350,13 +350,102 @@
    "effect_median_pp": 70,
    "single_turn": 56,
    "multi_turn": 44
+  },
+  "control_diagnostics": {
+   "zero_effect_inert_subset": {
+    "n_inv": 26,
+    "inert_q2_pooled": 0.4059,
+    "inert_ci95": [
+     0.2562,
+     0.5625
+    ],
+    "causal_q2_same_inv_pooled": 0.4215,
+    "paired_diff_mean": 0.029,
+    "paired_diff_ci95": [
+     -0.1394,
+     0.1847
+    ]
+   },
+   "causal_vs_inert_per_inv": {
+    "pearson_r": 0.451,
+    "n_inert_ge_causal": 43,
+    "n_inert_gt_causal": 20,
+    "n_equal": 23,
+    "n_pairs": 87
+   },
+   "per_investigation_inert_q2": {
+    "n": 87,
+    "frac_eq_0": 0.3333,
+    "frac_eq_1": 0.069,
+    "frac_ge_0.7": 0.2069,
+    "frac_le_0.3": 0.6322,
+    "median": 0.1304
+   },
+   "causal_eq_1_and_inert_eq_1": [
+    "prompt_001863",
+    "prompt_002095",
+    "prompt_004773"
+   ],
+   "description_overlap": {
+    "metric": "token Jaccard of content words between causal and inert v3 descriptions",
+    "jaccard_ge_0.3": {
+     "n": 14,
+     "paired_diff_high": 0.0729,
+     "paired_diff_rest": 0.1134
+    },
+    "jaccard_ge_0.4": {
+     "n": 8,
+     "paired_diff_high": 0.0374,
+     "paired_diff_rest": 0.1139
+    }
+   },
+   "validation_by_subset_v3": {
+    "behavior_causal": {
+     "q2_kappa_gpt": 0.467,
+     "q2_kappa_temp1": 0.822,
+     "n": 124
+    },
+    "behavior_inert": {
+     "q2_kappa_gpt": 0.36,
+     "q2_kappa_temp1": 0.598,
+     "n": 95
+    },
+    "non_behavior": {
+     "q2_kappa_gpt": 0.529,
+     "q2_kappa_temp1": 0.743,
+     "n": 81
+    },
+    "all": {
+     "q2_kappa_gpt": 0.468,
+     "q2_kappa_temp1": 0.75,
+     "n": 300
+    }
+   },
+   "validation_same_300_items_v2_v3": true,
+   "misread_framing": {
+    "v2": 680,
+    "v3": 29,
+    "fields": [
+     "q1_rationale",
+     "q2_rationale"
+    ],
+    "regex": "hypothetical|not applied|NOT used|was not used|edited version|modified version"
+   },
+   "slice_cis_overlap": {
+    "slice_think_capped": true,
+    "slice_edit_cleanliness": true,
+    "slice_is_mistake": true,
+    "slice_n_turns": true
+   },
+   "n_fresh_rate_below_0.5": 21
   }
  },
  "limitations": [
-  "The inert control is not a 'nothing' control: inert claims often name salient conversation content, so 33% attribution to an inert factor means verbalized reasons weakly discriminate the verified cause (+10.7 pp) rather than that the judge is wrong. The headline 42% is therefore an upper-bound-ish reading of 'names the verified cause': part of it would occur for any salient factor.",
-  "Selection favors large, clean, reproducible effects (|effect| ≥ 50 pp, verification ≥ 9, baseline ≥ 50%) and mistakes (96/100); rates may differ for subtler behaviors and non-mistakes (4 investigations only).",
-  "One model (Qwen3-8B), one thinking budget (1024 tokens, matching the released run; 27% of traces hit the cap and capped traces attribute more often, 53.8% vs 37.8%). The judge correction (v3) was made after the as-planned judge failed the pre-registered agreement check; both versions are reported and the headline moved by 2.2 pp. Cross-family agreement on Q2 is moderate (kappa 0.47), and the second-family judge is more liberal (40% vs 35% yes on the validation sample), so the absolute rate carries judge-dependent uncertainty of several points.",
-  "The paper's investigator wrote the claims after reading traces from the same prompts, and SGLang rather than vLLM served the model (token-level settings matched; cap and length profile reproduce)."
+  "The inert control is not a 'nothing' control and is elevated (32.6% pooled; 40.6% for inert factors with exactly 0 pp effect, against 42.1% causal on the same 26 investigations). Three sources are mixed and cannot be separated with this design: (a) same-span inert edits: the inert claim is selected by smallest |effect| without requiring a different span, and 8 to 14 of 87 pairs have v3 descriptions that overlap heavily with the causal description (e.g. prompt_002095: first-person pronoun vs the content of the same quoted sentence; both scored 1.0), with mean paired difference +3.7 to +7.3 pp vs +11.3 pp on the rest; (b) judge false positives: cross-family Q2 kappa on behavior/inert items is 0.36 (below the 0.4 threshold) and temperature-1 self-agreement is 0.60 vs 0.82 on causal items; (c) traces that present a non-causal aspect of the prompt as their reason (e.g. prompt_004403 citing an 'Nl' token as the reason for answering in Spanish). The 42% is therefore an upper bound on verbalizing the verified cause, and the inert rate and paired difference rest partly on judgments below the pre-registered agreement threshold.",
+  "The judge was redesigned (v2 → v3) after the as-planned prompt failed the cross-family agreement check, and the same 300 validation items were reused to diagnose the defect and to pass v3, so the v3 kappa (0.468 pooled, 0.467 on behavior/causal) is not an independent validation. Both versions are reported; the headline moved by +2.2 pp. The second-family judge is more liberal (40% vs 35% yes on the validation sample), so the absolute rate carries judge-dependent uncertainty of several points.",
+  "Selection favors large, clean, reproducible effects (|effect| ≥ 50 pp, verification ≥ 9, baseline ≥ 50%) and mistakes (96/100); rates may differ for subtler behaviors and non-mistakes (4 investigations only). 21 of the 100 investigations reproduced the behavior in fewer than half of fresh samples.",
+  "Slice contrasts are not distinguishable at this run's noise level: think-capped 53.8% [39.4, 67.8] vs uncapped 37.8% [29.2, 46.6] (completion-level split, confounded with investigation identity), large_single_factor 53.1% [38.6, 67.1] vs minor_targeted 38.5% [29.6, 47.7], mistakes 41.8% [33.7, 50.1] vs non-mistakes 46.9% [13.0, 64.7] on 4 investigations, multi-turn 44.5% [34.3, 54.8] vs single-turn 38.6% [27.0, 51.7]. All intervals overlap.",
+  "One model (Qwen3-8B), one thinking budget (1024 tokens, matching the released run; 27% of traces hit the cap). The paper's investigator wrote the claims after reading traces from the same prompts, and SGLang rather than vLLM served the model (token-level settings matched; cap and length profile reproduce)."
  ],
  "artifacts": {
   "summary": "experiments/experiment-1-7skka3/results/summary.json",
@@ -390,8 +479,10 @@
    "experiments/experiment-1-7skka3/src/judge.py",
    "experiments/experiment-1-7skka3/src/factor_rewrite.py",
    "experiments/experiment-1-7skka3/src/analyze.py",
-   "experiments/experiment-1-7skka3/figures/prepare_data.py"
-  ]
+   "experiments/experiment-1-7skka3/figures/prepare_data.py",
+   "experiments/experiment-1-7skka3/src/control_diagnostics.py"
+  ],
+  "control_diagnostics": "experiments/experiment-1-7skka3/results/control_diagnostics.json"
  },
  "paper": {
   "title": "Would this change your answer? Evaluating Explanations of LLM Behavior In The Wild with Counterfactual Experiments",

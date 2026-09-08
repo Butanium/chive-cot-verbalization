@@ -1,0 +1,52 @@
+{
+ "series": [
+  {
+   "label": "causal factor, all 87 pairs",
+   "q2": 0.4026
+  },
+  {
+   "label": "inert factor, all 87 pairs",
+   "q2": 0.3264
+  },
+  {
+   "label": "causal factor, zero-effect inert subset (26)",
+   "q2": 0.4215
+  },
+  {
+   "label": "inert factor, zero-effect subset (26)",
+   "q2": 0.4059
+  }
+ ],
+ "paired_diff": {
+  "all": {
+   "mean": 0.1069,
+   "ci95": [
+    0.0238,
+    0.1927
+   ],
+   "n_inv": 87
+  },
+  "zero_effect": {
+   "mean": 0.029,
+   "ci95": [
+    -0.1394,
+    0.1847
+   ],
+   "n_inv": 26
+  }
+ },
+ "kappa_q2_by_subset": {
+  "behavior_causal": {
+   "gpt": 0.467
+  },
+  "behavior_inert": {
+   "gpt": 0.36
+  },
+  "non_behavior": {
+   "gpt": 0.529
+  },
+  "all": {
+   "gpt": 0.468
+  }
+ }
+}

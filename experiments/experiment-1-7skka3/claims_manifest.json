@@ -133,7 +133,7 @@
    }
   },
   {
-   "claim": "Mistakes (96 inv) 41.8% vs non-mistakes (4 inv) 46.9%",
+   "claim": "Mistakes (96 inv) 41.8% [33.7, 50.1] vs non-mistakes (4 inv) 46.9% [13.0, 64.7]; CIs overlap",
    "source": "experiments/experiment-1-7skka3/results/summary.json",
    "key": "slice_is_mistake",
    "value": {
@@ -142,7 +142,7 @@
    }
   },
   {
-   "claim": "large_single_factor (23 inv) 53.1% vs minor_targeted (77 inv) 38.5%",
+   "claim": "large_single_factor (23 inv) 53.1% [38.6, 67.1] vs minor_targeted (77 inv) 38.5% [29.6, 47.7]; CIs overlap",
    "source": "experiments/experiment-1-7skka3/results/summary.json",
    "key": "slice_edit_cleanliness",
    "value": {
@@ -161,7 +161,7 @@
    }
   },
   {
-   "claim": "Multi-turn 44.5% vs single-turn 38.6%",
+   "claim": "Multi-turn 44.5% [34.3, 54.8] vs single-turn 38.6% [27.0, 51.7]; CIs overlap",
    "source": "experiments/experiment-1-7skka3/results/summary.json",
    "key": "slice_n_turns",
    "value": {
@@ -170,7 +170,7 @@
    }
   },
   {
-   "claim": "Think-capped completions 53.8% vs uncapped 37.8%",
+   "claim": "Think-capped completions 53.8% [39.4, 67.8] vs uncapped 37.8% [29.2, 46.6]; CIs overlap (completion-level split)",
    "source": "experiments/experiment-1-7skka3/results/summary.json",
    "key": "slice_think_capped",
    "value": {
@@ -262,11 +262,11 @@
    ]
   },
   {
-   "claim": "735 of 5610 v2 rationales and 29 of 5610 v3 rationales use the edit-misreading framing",
-   "source": "experiments/experiment-1-7skka3/results/judge_verdicts.jsonl; experiments/experiment-1-7skka3/results/judge_verdicts_v3.jsonl",
-   "key": "regex hypothetical|not applied|NOT used|was not used|edited version|modified version over q1_rationale,q2_rationale",
+   "claim": "680 of 5610 v2 items and 29 of 5610 v3 items have a Q1 or Q2 rationale matching the edit-misreading regex",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "misread_framing.v2_count, misread_framing.v3_count (regex and fields recorded there)",
    "value": [
-    735,
+    680,
     29
    ]
   },
@@ -293,6 +293,122 @@
    "source": "experiments/experiment-1-7skka3/results/examples.json",
    "key": "causal_verdicts.q2 count",
    "value": 10
+  },
+  {
+   "claim": "Zero-effect inert factors (26 inv, 643 completions): inert Q2 40.6% [25.6, 56.3] vs causal Q2 42.1% on the same investigations",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "inert_by_abs_effect.0",
+   "value": [
+    0.4059,
+    [
+     0.2562,
+     0.5625
+    ],
+    0.4215,
+    26,
+    643
+   ]
+  },
+  {
+   "claim": "Paired difference on the zero-effect subset +2.9 pp [-13.9, 18.5] (26 inv)",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "zero_effect_inert_subset.paired_diff_mean, paired_diff_ci95",
+   "value": [
+    0.029,
+    [
+     -0.1394,
+     0.1847
+    ]
+   ]
+  },
+  {
+   "claim": "Causal and inert per-investigation Q2 correlate at r = 0.45; inert >= causal in 43 of 87 pairs (20 strictly greater, 23 equal)",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "causal_vs_inert_per_inv",
+   "value": [
+    0.451,
+    43,
+    20,
+    23
+   ]
+  },
+  {
+   "claim": "Per-investigation inert Q2: median 0.13, 33.3% at 0, 6.9% at 1, 20.7% >= 0.7, 63.2% <= 0.3 (87 inv)",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "per_investigation_tails.inert",
+   "value": {
+    "n": 87,
+    "frac_eq_0": 0.3333,
+    "frac_eq_1": 0.069,
+    "frac_ge_0.7": 0.2069,
+    "frac_le_0.3": 0.6322,
+    "median": 0.1304
+   }
+  },
+  {
+   "claim": "3 of the 15 investigations with causal Q2 = 1.0 also have inert Q2 = 1.0 (prompt_001863, prompt_002095, prompt_004773)",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "per_investigation_tails.causal_eq_1_and_inert_eq_1",
+   "value": [
+    "prompt_001863",
+    "prompt_002095",
+    "prompt_004773"
+   ]
+  },
+  {
+   "claim": "Description overlap (content-word Jaccard of v3 descriptions): 14 pairs >= 0.3 with mean paired diff +7.3 pp vs +11.3 pp on the rest; 8 pairs >= 0.4 with +3.7 pp vs +11.4 pp",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "description_overlap.by_threshold.0.3, description_overlap.by_threshold.0.4",
+   "value": [
+    14,
+    0.0729,
+    0.1134,
+    8,
+    0.0374,
+    0.1139
+   ]
+  },
+  {
+   "claim": "Cross-family Q2 kappa by subset (v3): behavior/causal 0.467 (n=124), behavior/inert 0.360 (n=95), non-behavior 0.529 (n=81)",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "validation.gpt_5_6_terra_vs_sonnet5_v3.<subset>.q2.kappa",
+   "value": {
+    "behavior_causal": 0.467,
+    "behavior_inert": 0.36,
+    "non_behavior": 0.529
+   }
+  },
+  {
+   "claim": "Temperature-1 self-agreement Q2 kappa by subset (v3): behavior/causal 0.822, behavior/inert 0.598",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "validation.sonnet5_temp1_vs_temp0_v3.<subset>.q2.kappa",
+   "value": {
+    "behavior_causal": 0.822,
+    "behavior_inert": 0.598
+   }
+  },
+  {
+   "claim": "The 300 validation items are identical for the v2 and v3 judges",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "validation.same_300_items_v2_v3",
+   "value": true
+  },
+  {
+   "claim": "21 of 100 investigations reproduced the behavior in fewer than half of fresh samples",
+   "source": "experiments/experiment-1-7skka3/results/summary.json",
+   "key": "reproducibility.n_fresh_rate_below_0.5",
+   "value": 21
+  },
+  {
+   "claim": "All four slice contrasts (think-capped, edit cleanliness, is_mistake, n_turns) have overlapping 95% CIs",
+   "source": "experiments/experiment-1-7skka3/results/control_diagnostics.json",
+   "key": "slice_contrasts.<slice>.cis_overlap",
+   "value": {
+    "slice_think_capped": true,
+    "slice_edit_cleanliness": true,
+    "slice_is_mistake": true,
+    "slice_n_turns": true
+   }
   }
  ]
 }

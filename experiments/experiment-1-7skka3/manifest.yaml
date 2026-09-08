@@ -13,6 +13,7 @@ outputs:
   judge_verdicts_answer_primary: "results/judge_verdicts_answer_v3.jsonl"
   judge_verdicts_as_planned: "results/judge_verdicts.jsonl"
   summary: "results/summary.json"
+  control_diagnostics: "results/control_diagnostics.json"
   summary_as_planned: "results/summary_v2.json"
   per_investigation: "results/per_investigation.csv"
   examples: "results/examples.json"
@@ -24,6 +25,10 @@ results:
   paired_diff_causal_minus_inert_pp: 10.7
   answer_q2_attribution: 0.3380
   cross_family_q2_kappa: 0.468
+  cross_family_q2_kappa_inert_behavior_items: 0.360
+  cross_family_q2_kappa_causal_behavior_items: 0.467
+  zero_effect_inert_q2: 0.4059
+  zero_effect_paired_diff_pp: 2.9
   self_agreement_q2_kappa: 0.750
   fresh_behavior_rate: 0.721
   original_behavior_rate: 0.768
