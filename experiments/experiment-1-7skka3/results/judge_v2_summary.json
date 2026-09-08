@@ -1,0 +1,11 @@
+{
+  "judge": "anthropic/claude-sonnet-5 via OpenRouter, temperature 0, factor shown as hypothetical-edit text (v2 prompt)",
+  "n_think_items": 5610, "n_answer_items": 2163, "invalid": 0,
+  "behavior_exhibiting": {"causal": {"n": 2163, "q1": 0.553, "q2": 0.398, "q3": 0.855, "mention_only": 0.156, "alt_without_attribution": 0.521, "silent": 0.080},
+                          "inert": {"n": 1915, "q1": 0.573, "q2": 0.312, "q3": 0.837},
+                          "answer_segment_causal_q2": 0.295},
+  "validation_300": {"gpt-5.6-terra": {"q1_kappa": 0.465, "q2_kappa": 0.370, "q3_kappa": 0.164, "q2_agree": 0.690, "sonnet_q2_yes": 0.327, "gpt_q2_yes": 0.477},
+                     "sonnet_temp1": {"q1_kappa": 0.839, "q2_kappa": 0.724, "q3_kappa": 0.548}},
+  "defect": "735/5610 primary rationales frame the factor as the hypothetical/edited text; 468 of those are q1=no,q2=no, many of which are misreads (text discusses the original aspect). 69 of 93 Q2 disagreements with GPT are GPT-yes/Sonnet-no.",
+  "behavior_grades": {"fresh_rate": 0.721, "orig_rate": 0.768, "per_investigation_corr": 0.792, "min_k_fresh": 4}
+}
