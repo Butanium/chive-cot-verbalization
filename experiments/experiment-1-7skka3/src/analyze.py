@@ -71,15 +71,20 @@ def pearson(x, y):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--completions", default=os.path.join(os.environ.get("SILICO_EXPERIMENT_ARTIFACTS_DIR", ""), "resample/completions.jsonl"))
+    ap.add_argument("--version", default="v3", choices=["v2", "v3"],
+                    help="v3 = corrected judge (factor as original-content description; primary); v2 = as-planned edit-framed judge")
     args = ap.parse_args()
+    sfx = "" if args.version == "v3" else "_v2"
+    fsfx = "_v3" if args.version == "v3" else ""
 
     manifest = {r["prompt_id"]: r for r in load(RES / "manifest.jsonl")}
     grades = {r["prompt_id"]: r for r in load(RES / "behavior_grades.jsonl")}
     comps = {r["id"]: r for r in load(args.completions)}
-    verdicts = load(RES / "judge_verdicts.jsonl")
-    ans_verdicts = load(RES / "judge_verdicts_answer.jsonl")
-    val_gpt = load(RES / "judge_validation_gpt.jsonl")
-    val_t1 = load(RES / "judge_validation_temp1.jsonl")
+    verdicts = load(RES / f"judge_verdicts{fsfx}.jsonl")
+    ans_verdicts = load(RES / f"judge_verdicts_answer{fsfx}.jsonl")
+    val_gpt = load(RES / f"judge_validation_gpt{fsfx}.jsonl")
+    val_t1 = load(RES / f"judge_validation_temp1{fsfx}.jsonl")
+    descs = {(r["prompt_id"], r["factor_kind"]): r["description"] for r in load(RES / "factor_descriptions.jsonl")} if (RES / "factor_descriptions.jsonl").exists() else {}
     run_meta = json.load(open(Path(args.completions).parent / "run_meta.json")) if (Path(args.completions).parent / "run_meta.json").exists() else {}
 
     # ---------- index verdicts
@@ -122,7 +127,7 @@ def main():
                "n_investigations_with_behavior": len(groups),
                "judge_invalid_rate": invalid / total_verdicts if total_verdicts else None,
                "judge_invalid": invalid, "judge_total": total_verdicts,
-               "run_meta": run_meta}
+               "run_meta": run_meta, "judge_version": args.version, "judge_model": verdicts[0]["model"] if verdicts else None}
 
     # ---------- headline: pooled rates among behavior-exhibiting completions, cluster bootstrap
     def add_rate(name, key, sub=None):
@@ -173,7 +178,7 @@ def main():
                "inert_intervention": m["inert_factor"]["intervention"] if m["inert_factor"] else None}
         rec["paired_diff"] = (rec["causal_q2"] - rec["inert_q2"]) if rec["inert_q2"] is not None and rec["causal_q2"] is not None else None
         per_inv.append(rec)
-    with open(RES / "per_investigation.csv", "w", newline="") as f:
+    with open(RES / f"per_investigation{sfx}.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(per_inv[0].keys())); w.writeheader(); w.writerows(per_inv)
 
     diffs = [r["paired_diff"] for r in per_inv if r["paired_diff"] is not None]
@@ -218,6 +223,25 @@ def main():
             p, lo, hi = boot_ci(grp, lambda xs: rate(xs, "c_q2"))
             summary.setdefault("slice_think_capped", {})[label] = {"causal_q2": p, "ci95": [lo, hi], "n": sum(len(g) for g in grp)}
 
+    # ---------- inert control broken down by the inert claim's own edit cleanliness and |effect|
+    def inert_breakdown(name, keyfn):
+        buckets = collections.defaultdict(list)
+        for g in groups:
+            m = manifest[g[0]["prompt_id"]]
+            if m["inert_factor"] is None:
+                continue
+            gg = [r for r in g if r["i_q2"] is not None]
+            if gg:
+                buckets[str(keyfn(m["inert_factor"]))].append(gg)
+        out = {}
+        for k, grp in sorted(buckets.items()):
+            p, lo, hi = boot_ci(grp, lambda xs: rate(xs, "i_q2"))
+            pc, _, _ = boot_ci(grp, lambda xs: rate(xs, "c_q2"), n_boot=200)
+            out[k] = {"inert_q2": p, "ci95": [lo, hi], "causal_q2_same_investigations": pc, "n_inv": len(grp), "n": sum(len(g) for g in grp)}
+        summary[name] = out
+    inert_breakdown("inert_by_edit_cleanliness", lambda f: f["edit_cleanliness"])
+    inert_breakdown("inert_by_abs_effect", lambda f: "0" if abs(f["effect_pp"]) == 0 else ("0<|e|<=5" if abs(f["effect_pp"]) <= 5 else "5<|e|<=15" if abs(f["effect_pp"]) <= 15 else ">15"))
+
     # ---------- reproducibility: fresh vs original behavior rates
     fr = [r["k_fresh"] / r["n_fresh"] for r in per_inv]; orr = [r["k_orig"] / r["n_orig"] for r in per_inv]
     summary["reproducibility"] = {"pearson_r": pearson(fr, orr), "mean_fresh": sum(fr) / len(fr), "mean_orig": sum(orr) / len(orr),
@@ -260,12 +284,13 @@ def main():
         examples.append({"prompt_id": pid, "completion_index": i, "question": m["investigation_question"],
                          "behavior_question": m["classifier_question"], "messages": m["messages"],
                          "causal_intervention": m["causal_factor"]["intervention"], "causal_grounding": m["causal_factor"]["grounding"],
+                         "causal_description": descs.get((pid, "causal")), "inert_description": descs.get((pid, "inert")),
                          "effect_pp": m["effect_pp"], "inert_intervention": m["inert_factor"]["intervention"] if m["inert_factor"] else None,
                          "think": think, "answer": answer,
                          "causal_verdicts": {k: c[k] for k in c if k.startswith("q")} if c else None,
                          "inert_verdicts": {k: n[k] for k in n if k.startswith("q")} if n else None,
                          "answer_verdicts": {k: a[k] for k in a if k.startswith("q")} if a else None})
-    json.dump(examples, open(RES / "examples.json", "w"), indent=1, ensure_ascii=False)
+    json.dump(examples, open(RES / f"examples{sfx}.json", "w"), indent=1, ensure_ascii=False)
 
     # ---------- plot-ready data
     plot = {
@@ -275,8 +300,8 @@ def main():
                                "orig_rate": r["k_orig"] / r["n_orig"]} for r in per_inv],
         "pooled": {k: summary[k] for k in summary if k.startswith(("causal_", "inert_", "answer_")) and isinstance(summary[k], dict)},
     }
-    json.dump(plot, open(RES / "plot_data.json", "w"), indent=1)
-    json.dump(summary, open(RES / "summary.json", "w"), indent=1)
+    json.dump(plot, open(RES / f"plot_data{sfx}.json", "w"), indent=1)
+    json.dump(summary, open(RES / f"summary{sfx}.json", "w"), indent=1)
     print(json.dumps({k: v for k, v in summary.items() if k not in ("slice_category", "run_meta")}, indent=1))
 
 

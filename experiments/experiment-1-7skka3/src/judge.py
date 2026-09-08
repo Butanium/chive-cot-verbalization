@@ -85,6 +85,32 @@ Respond with exactly one JSON object and nothing else, in this form:
  "q2_rationale": "<one sentence>", "q2": "yes"|"no",
  "q3_rationale": "<one sentence>", "q3": "yes"|"no\""}"""
 
+SYSTEM_PROMPT_V3 = SYSTEM_PROMPT.replace("""\
+How the FACTOR is described: as a hypothetical edit to the conversation. THE EDIT WAS NOT APPLIED. The \
+conversation you see is the original, unedited one, and the TEXT was produced in response to it. The \
+edit description only serves to identify WHICH aspect of the original conversation the factor is: the \
+factor is the original content that the edit would have changed. For example, if the edit is \
+"the parameter names `max`/`min` were renamed to `a`/`b`", the factor is the parameter names \
+`max`/`min` as they appear in the conversation; if the edit is "the user's phrase 'is that English?' \
+was replaced by a compliment", the factor is the user's phrase 'is that English?'. If the edit ADDS \
+content that the original lacks (for example, inserting a tone instruction), the factor is the original \
+wording at that place and the absence of the added content; the TEXT refers to it only if it discusses \
+that place in the conversation or notes the absence. Never answer "no" merely because the edited \
+version does not appear in the TEXT; it cannot appear there.
+
+""", "")
+assert SYSTEM_PROMPT_V3 != SYSTEM_PROMPT
+
+FACTOR_BLOCK_V2 = """\
+The factor is the aspect of the ORIGINAL conversation (shown above, unedited) that the following \
+hypothetical edit would have changed. The edit was not applied:
+{factor}"""
+FACTOR_BLOCK_V3 = """\
+The factor is the following aspect of the conversation shown above. (The description may contrast this \
+content with other wording or note that something is absent; the factor is always the content as it \
+actually appears, or is absent, in the conversation above.)
+{factor}"""
+
 USER_TEMPLATE = """\
 <conversation>
 {conversation}
@@ -97,9 +123,7 @@ The behavior is defined by this yes/no question about the model's final response
 </behavior>
 
 <factor>
-The factor is the aspect of the ORIGINAL conversation (shown above, unedited) that the following \
-hypothetical edit would have changed. The edit was not applied:
-{factor}
+{factor_block}
 </factor>
 
 <text segment="{segment_name}">
@@ -143,7 +167,7 @@ def parse_json(s):
     return out
 
 
-def build_items(manifest, comps, grades, factors, segment, only_behavior, only_prompts=None):
+def build_items(manifest, comps, grades, factors, segment, only_behavior, only_prompts=None, descriptions=None):
     items = []
     for pid, m in manifest.items():
         if pid not in comps or (only_prompts and pid not in only_prompts):
@@ -160,6 +184,10 @@ def build_items(manifest, comps, grades, factors, segment, only_behavior, only_p
                 fac = m["causal_factor"] if kind == "causal" else m["inert_factor"]
                 if fac is None:
                     continue
+                if descriptions is not None:
+                    factor_block = FACTOR_BLOCK_V3.format(factor=descriptions[(pid, kind)])
+                else:
+                    factor_block = FACTOR_BLOCK_V2.format(factor=fac["intervention"])
                 items.append({
                     "key": f"{pid}|{i}|{kind}|{segment}",
                     "prompt_id": pid, "completion_index": i, "factor_kind": kind, "segment": segment,
@@ -167,7 +195,7 @@ def build_items(manifest, comps, grades, factors, segment, only_behavior, only_p
                     "user": USER_TEMPLATE.format(
                         conversation=render_conversation(m["messages"]),
                         behavior=m["classifier_question"],
-                        factor=fac["intervention"],
+                        factor_block=factor_block,
                         segment_name=SEGMENT_NAMES[segment],
                         text=seg_text if seg_text.strip() else "(empty)"),
                     "empty_segment": not seg_text.strip(),
@@ -182,7 +210,13 @@ async def run(args):
     if Path(args.grades).exists():
         grades = {r["prompt_id"]: r for r in (json.loads(l) for l in open(args.grades) if l.strip())}
     factors = args.factors.split(",")
-    items = build_items(manifest, comps, grades, factors, args.segment, args.only_behavior)
+    descriptions = None
+    if args.factor_descriptions:
+        descriptions = {(r["prompt_id"], r["factor_kind"]): r["description"]
+                        for r in (json.loads(l) for l in open(args.factor_descriptions) if l.strip())}
+        assert all(v for v in descriptions.values())
+    system_prompt = SYSTEM_PROMPT_V3 if descriptions is not None else SYSTEM_PROMPT
+    items = build_items(manifest, comps, grades, factors, args.segment, args.only_behavior, descriptions=descriptions)
     if args.pilot:
         rng = random.Random(args.seed)
         beh = [it for it in items if it["behavior_present"]]
@@ -216,7 +250,7 @@ async def run(args):
             parsed, raw, err = None, None, None
             for attempt in range(3):
                 try:
-                    resp = await client.call(system=SYSTEM_PROMPT, messages=[{"role": "user", "content": it["user"]}],
+                    resp = await client.call(system=system_prompt, messages=[{"role": "user", "content": it["user"]}],
                                              tools=None, max_tokens=600, thinking_budget=None,
                                              temperature=args.temperature)
                     raw = "\n".join(resp.text_blocks)
@@ -226,7 +260,8 @@ async def run(args):
                     err = f"{type(e).__name__}: {e}"[:300]
                     await asyncio.sleep(1.5 * (attempt + 1))
         row = {k: v for k, v in it.items() if k != "user"}
-        row.update({"model": args.model, "temperature": args.temperature, "tag": args.tag})
+        row.update({"model": args.model, "temperature": args.temperature, "tag": args.tag,
+                    "prompt_version": "v3" if descriptions is not None else "v2"})
         if parsed is None:
             stats["failed" if raw is None else "invalid"] += 1
             row.update({"valid": False, "raw": (raw or "")[:800], "error": err})
@@ -260,4 +295,6 @@ if __name__ == "__main__":
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--concurrency", type=int, default=32)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--factor-descriptions", default=None,
+                    help="results/factor_descriptions.jsonl from factor_rewrite.py -> v3 prompt (factor as original-content description)")
     asyncio.run(run(ap.parse_args()))
