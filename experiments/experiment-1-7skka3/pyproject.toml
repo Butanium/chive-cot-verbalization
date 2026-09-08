@@ -9,7 +9,13 @@
 name = "experiment-1-7skka3"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["pyyaml"]
+dependencies = [
+    "anthropic>=0.60",
+    "httpx>=0.28.1",
+    "openai>=1.60",
+    "pydantic>=2.13.5",
+    "pyyaml",
+]
 
 # silico-figures — the house Plotly style (apply_theme, add_reference_line,
 # save_figure_bundle, PLOTLY_CONFIG) — comes preinstalled: `uv run` here on

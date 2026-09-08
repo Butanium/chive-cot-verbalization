@@ -142,6 +142,10 @@ async def sample_prompt(client, url, tok, cand: dict, n: int, sem: asyncio.Semap
             closed = strip_eos(a_ids)
             body = closed[1:] if has_think else closed
             return _pack(closed, "", tok.decode(body, skip_special_tokens=True), "stop", False, 0, len(body))
+        elif a_ids and a_ids[-1] == THINK_END:
+            # </think> emitted naturally as the very last allowed token (reported as length): not capped
+            closed = a_ids
+            was_capped = False
         else:
             assert fr["type"] == "length", fr
             closed = a_ids + [THINK_END]          # budget exhausted -> force </think>, as vLLM does
