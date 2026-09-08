@@ -1,5 +1,7 @@
 # How often Qwen3-8B's chain of thought verbalizes the verified cause of its behavior
 
+Full report: [report/index.html](report/index.html) (published results page with figures; data files under `report/artifacts/`).
+
 ## What this is
 For 100 `Qwen3-8B` thinking-mode behaviors from the paper "Would this change your answer?" (arXiv 2608.16747, released chive run `qwen3_8b_wildchat_thinking_eval`) whose cause was pinned down by a verified counterfactual (|effect| ≥ 50 pp, verification ≥ 9, clean edit), we resample the original prompt 30 times with thinking on, grade behavior with the paper's grader, and ask an LLM judge whether the `<think>` trace attributes the behavior to the causal factor. The same judgment is made for an inert factor from the same investigation (87/100) and for the visible answer.
 

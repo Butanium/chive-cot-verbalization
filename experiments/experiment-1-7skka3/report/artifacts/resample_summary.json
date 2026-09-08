@@ -1,0 +1,10 @@
+{
+  "job_id": "940569256367",
+  "n_prompts": 100, "n_completions_per_prompt": 30, "total": 3000,
+  "fresh": {"think_capped_rate": 0.2683, "finish_length_rate": 0.104, "think_tokens_median": 591, "think_tokens_p10": 293, "think_tokens_p90": 1024, "no_think_segment": 0, "empty_dropped": 0, "malformed": 0, "empty_answers": 0, "boundary_artifacts_patched": 1},
+  "released_same_100_prompts": {"think_ge_1020_rate": 0.2717, "think_tokens_median": 594, "n": 3000},
+  "released_all_2000": {"think_ge_1000_rate": 0.182, "finish_length_rate": 0.145},
+  "server_load_seconds": 133.1, "generation_seconds": 845.0,
+  "patched_file": "$SILICO_EXPERIMENT_ARTIFACTS_DIR/resample/completions_patched.jsonl",
+  "artifact_ref": "artifact://truthful-ai-7a2189/experiments/exp_01m1z3kydjek0arxfb1w7skka3/resample/completions.jsonl"
+}

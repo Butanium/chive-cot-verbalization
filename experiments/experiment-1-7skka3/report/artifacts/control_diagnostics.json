@@ -1,0 +1,641 @@
+{
+ "n_paired_investigations": 87,
+ "zero_effect_inert_subset": {
+  "n_inv": 26,
+  "mean_causal_q2_per_inv": 0.42157160641995145,
+  "mean_inert_q2_per_inv": 0.3926133187152677,
+  "paired_diff_mean": 0.028958287704683734,
+  "paired_diff_ci95": [
+   -0.1394340054287004,
+   0.18472367635439946
+  ]
+ },
+ "paired_diff_all": {
+  "n_inv": 87,
+  "mean": 0.10689863183988892,
+  "ci95": [
+   0.02376477068699923,
+   0.1927083728555361
+  ]
+ },
+ "causal_vs_inert_per_inv": {
+  "pearson_r": 0.45059568820269696,
+  "n_inert_ge_causal": 43,
+  "n_inert_gt_causal": 20,
+  "n_equal": 23
+ },
+ "per_investigation_tails": {
+  "causal": {
+   "n": 100,
+   "frac_eq_0": 0.22,
+   "frac_eq_1": 0.15,
+   "frac_ge_0.7": 0.35,
+   "frac_le_0.3": 0.48,
+   "median": 0.35
+  },
+  "inert": {
+   "n": 87,
+   "frac_eq_0": 0.3333333333333333,
+   "frac_eq_1": 0.06896551724137931,
+   "frac_ge_0.7": 0.20689655172413793,
+   "frac_le_0.3": 0.632183908045977,
+   "median": 0.13043478260869565
+  },
+  "causal_eq_1_and_inert_eq_1": [
+   "prompt_001863",
+   "prompt_002095",
+   "prompt_004773"
+  ],
+  "causal_eq_1_total": [
+   "prompt_000033",
+   "prompt_000153",
+   "prompt_000269",
+   "prompt_000593",
+   "prompt_001144",
+   "prompt_001526",
+   "prompt_001536",
+   "prompt_001607",
+   "prompt_001863",
+   "prompt_001979",
+   "prompt_002095",
+   "prompt_002194",
+   "prompt_002532",
+   "prompt_003889",
+   "prompt_004773"
+  ],
+  "causal_eq_0_and_inert_eq_0": [
+   "prompt_000456",
+   "prompt_000515",
+   "prompt_000986",
+   "prompt_001211",
+   "prompt_001598",
+   "prompt_001663",
+   "prompt_002211",
+   "prompt_002259",
+   "prompt_002477",
+   "prompt_002843",
+   "prompt_003162",
+   "prompt_003477",
+   "prompt_003690",
+   "prompt_004138",
+   "prompt_004943"
+  ]
+ },
+ "description_overlap": {
+  "metric": "token Jaccard of content words between causal and inert v3 descriptions",
+  "median_jaccard": 0.14606741573033707,
+  "by_threshold": {
+   "0.3": {
+    "n_high_overlap": 14,
+    "paired_diff_high": 0.07286747186139596,
+    "paired_diff_rest": 0.11342515567138074,
+    "causal_q2_high": 0.49317443855945287,
+    "inert_q2_high": 0.42030696669805684,
+    "high_overlap_ids": [
+     "prompt_004715",
+     "prompt_001427",
+     "prompt_000120",
+     "prompt_002542",
+     "prompt_002259",
+     "prompt_002832",
+     "prompt_000916",
+     "prompt_003607",
+     "prompt_001863",
+     "prompt_000515",
+     "prompt_003596",
+     "prompt_001526",
+     "prompt_002532",
+     "prompt_002095"
+    ]
+   },
+   "0.4": {
+    "n_high_overlap": 8,
+    "paired_diff_high": 0.03737564697183572,
+    "paired_diff_rest": 0.11393893410500824,
+    "causal_q2_high": 0.24698383890761388,
+    "inert_q2_high": 0.20960819193577815,
+    "high_overlap_ids": [
+     "prompt_004715",
+     "prompt_001427",
+     "prompt_000120",
+     "prompt_002542",
+     "prompt_002259",
+     "prompt_002832",
+     "prompt_000916",
+     "prompt_003607"
+    ]
+   },
+   "0.5": {
+    "n_high_overlap": 3,
+    "paired_diff_high": 0.00864197530864197,
+    "paired_diff_rest": 0.11040779814457632,
+    "causal_q2_high": 0.32222222222222224,
+    "inert_q2_high": 0.3135802469135803,
+    "high_overlap_ids": [
+     "prompt_004715",
+     "prompt_001427",
+     "prompt_000120"
+    ]
+   }
+  },
+  "top_pairs": [
+   {
+    "prompt_id": "prompt_004715",
+    "jaccard": 0.65,
+    "causal_q2": 0.1,
+    "inert_q2": 0.1,
+    "causal_desc": "In the original conversation, the subject of the request is Debbie Harry, described as an actress, and the opening line reads 'Delve into the creative process of Debbie Harry(actress), exploring how they approach their work and what makes their style or approach unique.' All subsequent instructions and formatting requirements remain unchanged and apply to this subject.",
+    "inert_desc": "The original conversation specifies the subject as 'Debbie Harry(actress)' in the opening line: 'Artistic Vision and Process: Delve into the creative process of Debbie Harry(actress), exploring how they approach their work and what makes their style or approach unique.' All subsequent instructions and formatting requirements remain the same regardless of this subject name."
+   },
+   {
+    "prompt_id": "prompt_001427",
+    "jaccard": 0.558,
+    "causal_q2": 0.0,
+    "inert_q2": 0.07407407407407407,
+    "causal_desc": "In the original conversation, the actress is named \"Katie Holmes\" throughout, including in the Subject Name field, the summary text, and the phrase \"Katie Holmes and Tom Cruz's relationship first meeting in April 2005 Katie Holmes and Tom Cruz soon became national news in previous interviews Holmes had indicated that she harbored teenage feelings for Cruz.\" The name \"Sarah Mitchell\" does not appear anywhere in the original text.",
+    "inert_desc": "In the original conversation, the request is about actress Katie Holmes rather than Nicole Kidman, and the summary states the first meeting between Katie Holmes and \"Tom Cruz\" occurred in April 2005 (not April 1990). The subject name field reads \"[First Meeting and Relationship Overview]\" with the summary referencing \"Katie Holmes and Tom Cruz's relationship first meeting in April 2005 Katie Holmes and Tom Cruz soon became national news in previous interviews Holmes had indicated that she harbored teenage feelings for Cruz.\""
+   },
+   {
+    "prompt_id": "prompt_000120",
+    "jaccard": 0.541,
+    "causal_q2": 0.8666666666666667,
+    "inert_q2": 0.7666666666666667,
+    "causal_desc": "In the original conversation, the first user turn asks \"In 2022, were smartphone plans without data overage fees more common than plans with data overage fees?\" and the assistant's response references 2022 throughout, stating \"In 2022, smartphone plans without data overage fees became more common compared to previous years\" and concluding \"it was more common in 2022 to find plans without traditional data overage fees than plans that still charged them.\"",
+    "inert_desc": "In the first user turn, the question asks about the year 2022, not 2023: \"In 2022, were smartphone plans without data overage fees more common than plans with data overage fees?\" This matches the assistant's response, which repeatedly references 2022 (e.g., \"In 2022, smartphone plans without data overage fees became more common...\" and \"it was more common in 2022 to find plans without traditional data overage fees\")."
+   },
+   {
+    "prompt_id": "prompt_002542",
+    "jaccard": 0.495,
+    "causal_q2": 0.6896551724137931,
+    "inert_q2": 0.6551724137931034,
+    "causal_desc": "The original conversation contains three prior exchanges rather than one: the first asks 'is bicarbonate healthy' with a detailed response on sodium bicarbonate's benefits (antacid properties, exercise performance, kidney health, alkalinity) and considerations (sodium content, side effects, medication interactions); the second asks 'How does baking soda react on meat' with a response covering tenderizing, texture improvement, and the Maillard reaction; and the third asks 'what does baking soda do on an open wound' with a response explaining that baking soda is not recommended for open wounds due to irritation, infection risk, and limited antimicrobial properties, recommending professional guidance and alternatives like saline or hydrogen peroxide instead. There is no exchange about vinegar on open wounds in the original.",
+    "inert_desc": "The original conversation begins with a user question 'is bicarbonate healthy,' followed by an assistant response detailing benefits (antacid properties, exercise performance, kidney health, alkalinity) and considerations (sodium content, side effects, medication interactions) of bicarbonate. This is followed by a second user question 'How does baking soda react on meat,' with an assistant response covering tenderizing, texture improvement, the Maillard reaction, and considerations like quantity and rinsing. The third turn, 'what does baking soda do on an open wound,' is answered with a detailed assistant response explicitly warning against using baking soda on open wounds, citing irritation from alkalinity, infection risk from trapped moisture, limited antimicrobial properties, disruption of proper wound healing, and recommending professional guidance and alternative treatments like saline or antiseptics instead."
+   },
+   {
+    "prompt_id": "prompt_002259",
+    "jaccard": 0.485,
+    "causal_q2": 0.0,
+    "inert_q2": 0.0,
+    "causal_desc": "The original conversation begins with the user greeting \"hi\" and the assistant replying \"Hello! How can I assist you today?\". The user then presents a passwd file task with a multi-part request (a through g) involving creating a passwd_new file, using AWK and SED to change shells for specific users (saned, avahi), extracting the 1st, 3rd, 5th, and 7th colon-delimited columns, removing lines containing \"daemon\", changing shells for users with even UIDs to /bin/zsh, and ensuring no trailing newline, all while avoiding additional installed packages like gawk.",
+    "inert_desc": "The original conversation begins with the user saying \"hi\" and the assistant replying \"Hello! How can I assist you today?\", followed by a detailed multi-part task involving a passwd file. The user provides the literal content of a passwd_new file (a list of system user entries like rtkit, dnsmasq, cups-pk-helper, saned, etc.) and asks for several operations: (a) making all edits in passwd_new, (b) changing saned's shell from /usr/sbin/nologin to /bin/bash using AWK, (c) changing avahi's shell from /usr/sbin/nologin to /bin/bash using SED, (d) keeping only the 1st, 3rd, 5th, 7th colon-delimited columns, (e) removing lines containing the word 'daemon', (f) changing the shell to /bin/zsh for all users with even UID, and (g) ensuring passwd_new has no trailing newline, with a final note to avoid using additional installed packages like gawk."
+   },
+   {
+    "prompt_id": "prompt_002832",
+    "jaccard": 0.458,
+    "causal_q2": 0.047619047619047616,
+    "inert_q2": 0.047619047619047616,
+    "causal_desc": "The original conversation begins with a user message in English asking 'how to apply a recommendation letter from my supervisor?', followed by an assistant response providing a detailed seven-step guide (requesting permission, selecting relevant applications, customizing for each application, providing necessary details, understanding submission deadlines, optionally attaching a resume, and expressing gratitude), concluding with a note about maintaining communication with the supervisor. Only after this full exchange does the user send the Chinese message '\u7533\u8bf7\u63a8\u8350\u4fe1\u7684\u90ae\u4ef6\u6a21\u677f' as the second turn in the conversation.",
+    "inert_desc": "In the original conversation, the assistant's first response (to 'how to apply a recommendation letter from my supervisor?') was written entirely in English, not Chinese. It presented the same seven numbered steps\u2014requesting permission, selecting relevant applications, customizing for each application, providing necessary details, understanding submission deadlines, optionally attaching a resume, and expressing gratitude\u2014all phrased in English prose, including the introductory line 'To apply a recommendation letter from your supervisor, follow these steps:' and the closing reminder about maintaining communication with the supervisor."
+   },
+   {
+    "prompt_id": "prompt_000916",
+    "jaccard": 0.448,
+    "causal_q2": 0.10526315789473684,
+    "inert_q2": 0.0,
+    "causal_desc": "In the final paragraph of the user's message, the text reads \"execution of the appropriate functions with the provided parameters to ensure the completion of these enhancements,\" preceded by the phrase \"update the access control system with biometric verification, enhance the surveillance system with threat detection capabilities, and secure the communication channels as specified.\" The phrase describing the access control update in that closing paragraph is \"update the access control system with biometric verification,\" not a version specifying fingerprint and facial recognition.",
+    "inert_desc": "The original message ends with two separate closing sentences after the three numbered requirements: first, \"Please proceed with the necessary function calls to update the access control system with biometric verification, enhance the surveillance system with threat detection capabilities, and secure the communication channels as specified.\" followed by a second sentence, \"I request the execution of the appropriate functions with the provided parameters to ensure the completion of these enhancements.\""
+   },
+   {
+    "prompt_id": "prompt_003607",
+    "jaccard": 0.425,
+    "causal_q2": 0.16666666666666666,
+    "inert_q2": 0.03333333333333333,
+    "causal_desc": "In the original USER message, the final sentence reads: \"I need an analysis of the change impact and, based on that, an evaluation of our team dynamics to determine if we need to adjust our leadership approach.\" This includes a request for a team dynamics evaluation in addition to the change impact analysis, which is not present in the trimmed version.",
+    "inert_desc": "In the original conversation, the user's final sentence reads: \"I need an analysis of the change impact and, based on that, an evaluation of our team dynamics to determine if we need to adjust our leadership approach.\" This phrasing frames the team dynamics evaluation as dependent on the results of the change impact analysis, rather than presenting them as two separate, independently listed analyses."
+   },
+   {
+    "prompt_id": "prompt_001863",
+    "jaccard": 0.382,
+    "causal_q2": 1.0,
+    "inert_q2": 1.0,
+    "causal_desc": "The final Source Text line at the end of the prompt originally read: \"A press release on June 15, 2024, confirmed Maria Flores will step down on June 30, 2024.\" This uses the clausal phrase \"confirmed Maria Flores will step down on June 30, 2024\" rather than a nominalized construction.",
+    "inert_desc": "In the original conversation, the Source Text at the end reads: \"A press release on June 15, 2024, confirmed Maria Flores will step down on June 30, 2024.\" The described action is Maria Flores stepping down (departing), not joining a company."
+   },
+   {
+    "prompt_id": "prompt_000515",
+    "jaccard": 0.364,
+    "causal_q2": 0.0,
+    "inert_q2": 0.0,
+    "causal_desc": "In the Instructions block of the original message, immediately after the sentence about the text being around 1000 characters long and before the sentence beginning 'Provide a single coherent response...', there is a line stating: 'Ensure that there are no emojis, text within brackets, parentheses, or similar symbols in the response.' This instruction appears in the original conversation.",
+    "inert_desc": "In the original conversation, the instruction reads: \"Ensure that there are no emojis, text within brackets, parentheses, or similar symbols in the response,\" which appears in the Instructions section of the user's message, including the phrase \"or similar symbols\" as part of the list of forbidden content."
+   },
+   {
+    "prompt_id": "prompt_003596",
+    "jaccard": 0.357,
+    "causal_q2": 0.9285714285714286,
+    "inert_q2": 0.9285714285714286,
+    "causal_desc": "In the original lyrics, the line in the penultimate stanza reads \"I'm going back to Colorado\" (followed by \"The place that I started from\"), matching the earlier line \"I'll say goodbye to Colorado\" so that the singer says goodbye to and later returns to the same place, Colorado.",
+    "inert_desc": "In the lyrics quoted by the user, the place name is \"Colorado\" in both instances: the line \"I'll say goodbye to Colorado\" and the line \"I'm going back to Colorado.\""
+   },
+   {
+    "prompt_id": "prompt_001526",
+    "jaccard": 0.321,
+    "causal_q2": 1.0,
+    "inert_q2": 0.9310344827586207,
+    "causal_desc": "The final user message in the original conversation reads \"make it easier to understand,\" appearing as the last line of the conversation, requesting a simplified version of the previously written alternate lyrics.",
+    "inert_desc": "The final user message in the original conversation simply reads \"make it easier to understand,\" without any additional instruction about keeping the rewrite creative or original."
+   },
+   {
+    "prompt_id": "prompt_002532",
+    "jaccard": 0.32,
+    "causal_q2": 1.0,
+    "inert_q2": 0.34782608695652173,
+    "causal_desc": "The tweet quoted in the user's message reads: '@GarbageHuman24 If all races can agree that they are different, unite against the common enemy, then go their separate ways and just coexist in different parts of the world things would be a lot better' \u2014 using this softer, more indirect phrasing about races uniting and separating rather than any explicit statement about segregation.",
+    "inert_desc": "In the original conversation, the quoted tweet ends with \"...go their separate ways and just coexist in different parts of the world things would be a lot better,\" using the word \"coexist\" rather than \"live\" in that phrase."
+   },
+   {
+    "prompt_id": "prompt_002095",
+    "jaccard": 0.312,
+    "causal_q2": 1.0,
+    "inert_q2": 1.0,
+    "causal_desc": "In the second user turn, the teacher's reported explanation is quoted in first-person: \"I just had a psychology sequela after my illness,\" meaning the teacher is describing his own condition using \"I\" and \"my.\"",
+    "inert_desc": "In the final user turn, the teacher's explanation given to the person who approached them was that he 'just had a psychology sequela after my illness,' not a statement about stress from school."
+   }
+  ]
+ },
+ "validation": {
+  "same_300_items_v2_v3": true,
+  "n_items": 300,
+  "note": "The 300 validation items were sampled once (seed 42) and reused for v2 and v3; the v2 defect was diagnosed from Q2 disagreements on these items, so the v3 cross-family kappa is not an independent test of the redesigned prompt.",
+  "gpt_5_6_terra_vs_sonnet5_v3": {
+   "behavior_inert": {
+    "q1": {
+     "kappa": 0.6101231190150478,
+     "agreement": 0.8105263157894737,
+     "n": 95,
+     "primary_yes": 0.5578947368421052,
+     "other_yes": 0.6210526315789474
+    },
+    "q2": {
+     "kappa": 0.36010362694300524,
+     "agreement": 0.7263157894736842,
+     "n": 95,
+     "primary_yes": 0.2631578947368421,
+     "other_yes": 0.3473684210526316
+    },
+    "q3": {
+     "kappa": 0.10588235294117654,
+     "agreement": 0.8315789473684211,
+     "n": 95,
+     "primary_yes": 0.8947368421052632,
+     "other_yes": 0.8947368421052632
+    }
+   },
+   "all": {
+    "q1": {
+     "kappa": 0.6471471471471473,
+     "agreement": 0.8433333333333334,
+     "n": 300,
+     "primary_yes": 0.6333333333333333,
+     "other_yes": 0.71
+    },
+    "q2": {
+     "kappa": 0.46848719644713216,
+     "agreement": 0.75,
+     "n": 300,
+     "primary_yes": 0.3466666666666667,
+     "other_yes": 0.4033333333333333
+    },
+    "q3": {
+     "kappa": 0.26406454426515474,
+     "agreement": 0.85,
+     "n": 300,
+     "primary_yes": 0.8733333333333333,
+     "other_yes": 0.8966666666666666
+    }
+   },
+   "non_behavior": {
+    "q1": {
+     "kappa": 0.6367713004484304,
+     "agreement": 0.8518518518518519,
+     "n": 81,
+     "primary_yes": 0.691358024691358,
+     "other_yes": 0.7407407407407407
+    },
+    "q2": {
+     "kappa": 0.5294117647058824,
+     "agreement": 0.8024691358024691,
+     "n": 81,
+     "primary_yes": 0.25925925925925924,
+     "other_yes": 0.3333333333333333
+    },
+    "q3": {
+     "kappa": 0.5423728813559321,
+     "agreement": 0.8765432098765432,
+     "n": 81,
+     "primary_yes": 0.8271604938271605,
+     "other_yes": 0.8518518518518519
+    }
+   },
+   "behavior_causal": {
+    "q1": {
+     "kappa": 0.6742892459826947,
+     "agreement": 0.8629032258064516,
+     "n": 124,
+     "primary_yes": 0.6532258064516129,
+     "other_yes": 0.7580645161290323
+    },
+    "q2": {
+     "kappa": 0.4671875000000001,
+     "agreement": 0.7338709677419355,
+     "n": 124,
+     "primary_yes": 0.46774193548387094,
+     "other_yes": 0.49193548387096775
+    },
+    "q3": {
+     "kappa": 0.09384615384615476,
+     "agreement": 0.8467741935483871,
+     "n": 124,
+     "primary_yes": 0.8870967741935484,
+     "other_yes": 0.9274193548387096
+    }
+   }
+  },
+  "sonnet5_temp1_vs_temp0_v3": {
+   "behavior_causal": {
+    "q1": {
+     "kappa": 0.8575940281366636,
+     "agreement": 0.9354838709677419,
+     "n": 124,
+     "primary_yes": 0.6532258064516129,
+     "other_yes": 0.6532258064516129
+    },
+    "q2": {
+     "kappa": 0.8216527196652719,
+     "agreement": 0.9112903225806451,
+     "n": 124,
+     "primary_yes": 0.46774193548387094,
+     "other_yes": 0.4596774193548387
+    },
+    "q3": {
+     "kappa": 0.4477434679334914,
+     "agreement": 0.8790322580645161,
+     "n": 124,
+     "primary_yes": 0.8870967741935484,
+     "other_yes": 0.8629032258064516
+    }
+   },
+   "all": {
+    "q1": {
+     "kappa": 0.8346116970278044,
+     "agreement": 0.9233333333333333,
+     "n": 300,
+     "primary_yes": 0.6333333333333333,
+     "other_yes": 0.6366666666666667
+    },
+    "q2": {
+     "kappa": 0.7498037676609106,
+     "agreement": 0.8866666666666667,
+     "n": 300,
+     "primary_yes": 0.3466666666666667,
+     "other_yes": 0.3466666666666667
+    },
+    "q3": {
+     "kappa": 0.5023958717287137,
+     "agreement": 0.88,
+     "n": 300,
+     "primary_yes": 0.8733333333333333,
+     "other_yes": 0.8466666666666667
+    }
+   },
+   "behavior_inert": {
+    "q1": {
+     "kappa": 0.8074757937401487,
+     "agreement": 0.9052631578947369,
+     "n": 95,
+     "primary_yes": 0.5578947368421052,
+     "other_yes": 0.5684210526315789
+    },
+    "q2": {
+     "kappa": 0.5980253878702396,
+     "agreement": 0.8421052631578947,
+     "n": 95,
+     "primary_yes": 0.2631578947368421,
+     "other_yes": 0.2736842105263158
+    },
+    "q3": {
+     "kappa": 0.31325301204819295,
+     "agreement": 0.8421052631578947,
+     "n": 95,
+     "primary_yes": 0.8947368421052632,
+     "other_yes": 0.8421052631578947
+    }
+   },
+   "non_behavior": {
+    "q1": {
+     "kappa": 0.8264285714285714,
+     "agreement": 0.9259259259259259,
+     "n": 81,
+     "primary_yes": 0.691358024691358,
+     "other_yes": 0.691358024691358
+    },
+    "q2": {
+     "kappa": 0.742857142857143,
+     "agreement": 0.9012345679012346,
+     "n": 81,
+     "primary_yes": 0.25925925925925924,
+     "other_yes": 0.25925925925925924
+    },
+    "q3": {
+     "kappa": 0.7409381663113007,
+     "agreement": 0.9259259259259259,
+     "n": 81,
+     "primary_yes": 0.8271604938271605,
+     "other_yes": 0.8271604938271605
+    }
+   }
+  },
+  "gpt_5_6_terra_vs_sonnet5_v2": {
+   "behavior_inert": {
+    "q1": {
+     "kappa": 0.40043525571273136,
+     "agreement": 0.6947368421052632,
+     "n": 95,
+     "primary_yes": 0.4842105263157895,
+     "other_yes": 0.7894736842105263
+    },
+    "q2": {
+     "kappa": 0.25017938292274583,
+     "agreement": 0.6526315789473685,
+     "n": 95,
+     "primary_yes": 0.23157894736842105,
+     "other_yes": 0.43157894736842106
+    },
+    "q3": {
+     "kappa": 0.1814058956916101,
+     "agreement": 0.8,
+     "n": 95,
+     "primary_yes": 0.8736842105263158,
+     "other_yes": 0.8421052631578947
+    }
+   },
+   "all": {
+    "q1": {
+     "kappa": 0.46540581638471773,
+     "agreement": 0.75,
+     "n": 300,
+     "primary_yes": 0.5533333333333333,
+     "other_yes": 0.8033333333333333
+    },
+    "q2": {
+     "kappa": 0.3698048427900251,
+     "agreement": 0.69,
+     "n": 300,
+     "primary_yes": 0.32666666666666666,
+     "other_yes": 0.4766666666666667
+    },
+    "q3": {
+     "kappa": 0.16354196711854607,
+     "agreement": 0.8066666666666666,
+     "n": 300,
+     "primary_yes": 0.87,
+     "other_yes": 0.8633333333333333
+    }
+   },
+   "behavior_causal": {
+    "q1": {
+     "kappa": 0.47543668122270744,
+     "agreement": 0.75,
+     "n": 124,
+     "primary_yes": 0.5403225806451613,
+     "other_yes": 0.7903225806451613
+    },
+    "q2": {
+     "kappa": 0.4898431473386474,
+     "agreement": 0.7419354838709677,
+     "n": 124,
+     "primary_yes": 0.4274193548387097,
+     "other_yes": 0.5403225806451613
+    },
+    "q3": {
+     "kappa": 0.18672839506172878,
+     "agreement": 0.8629032258064516,
+     "n": 124,
+     "primary_yes": 0.8951612903225806,
+     "other_yes": 0.9193548387096774
+    }
+   },
+   "non_behavior": {
+    "q1": {
+     "kappa": 0.5314307751639027,
+     "agreement": 0.8148148148148148,
+     "n": 81,
+     "primary_yes": 0.654320987654321,
+     "other_yes": 0.8395061728395061
+    },
+    "q2": {
+     "kappa": 0.26554404145077704,
+     "agreement": 0.654320987654321,
+     "n": 81,
+     "primary_yes": 0.2839506172839506,
+     "other_yes": 0.43209876543209874
+    },
+    "q3": {
+     "kappa": 0.10090817356205861,
+     "agreement": 0.7283950617283951,
+     "n": 81,
+     "primary_yes": 0.8271604938271605,
+     "other_yes": 0.8024691358024691
+    }
+   }
+  }
+ },
+ "misread_framing": {
+  "regex": "hypothetical|not applied|NOT used|was not used|edited version|modified version",
+  "flags": "IGNORECASE",
+  "fields": [
+   "q1_rationale",
+   "q2_rationale"
+  ],
+  "v2_count": 680,
+  "v3_count": 29,
+  "n_items": 5610
+ },
+ "slice_contrasts": {
+  "slice_think_capped": {
+   "capped": {
+    "causal_q2": 0.5384615384615384,
+    "ci95": [
+     0.3944954128440367,
+     0.6780045351473923
+    ],
+    "n_inv": null,
+    "n": 559
+   },
+   "not_capped": {
+    "causal_q2": 0.378428927680798,
+    "ci95": [
+     0.29198813056379824,
+     0.46611253196930946
+    ],
+    "n_inv": null,
+    "n": 1604
+   },
+   "cis_overlap": true
+  },
+  "slice_edit_cleanliness": {
+   "large_single_factor": {
+    "causal_q2": 0.5313725490196078,
+    "ci95": [
+     0.3859964093357271,
+     0.6714876033057852
+    ],
+    "n_inv": 23,
+    "n": 510
+   },
+   "minor_targeted": {
+    "causal_q2": 0.3853599516031458,
+    "ci95": [
+     0.2962085308056872,
+     0.4766961651917404
+    ],
+    "n_inv": 77,
+    "n": 1653
+   },
+   "cis_overlap": true
+  },
+  "slice_is_mistake": {
+   "True": {
+    "causal_q2": 0.41786743515850144,
+    "ci95": [
+     0.33672055427251735,
+     0.5007496251874063
+    ],
+    "n_inv": 96,
+    "n": 2082
+   },
+   "False": {
+    "causal_q2": 0.4691358024691358,
+    "ci95": [
+     0.13043478260869565,
+     0.646551724137931
+    ],
+    "n_inv": 4,
+    "n": 81
+   },
+   "cis_overlap": true
+  },
+  "slice_n_turns": {
+   "multi-turn": {
+    "causal_q2": 0.4445337620578778,
+    "ci95": [
+     0.34261407579273007,
+     0.548469387755102
+    ],
+    "n_inv": 56,
+    "n": 1244
+   },
+   "single-turn": {
+    "causal_q2": 0.3862894450489663,
+    "ci95": [
+     0.26965065502183405,
+     0.5168884339815762
+    ],
+    "n_inv": 44,
+    "n": 919
+   },
+   "cis_overlap": true
+  }
+ },
+ "reproducibility_n_fresh_rate_below_0.5": 21
+}
